@@ -1,0 +1,30 @@
+{
+  "name": "telegram-nft-marketplace",
+  "version": "0.0.1",
+  "description": "nft marketplace for telegram",
+  "main": "/dapp/index.tsx",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoonSHRD/TelegramNFTMarketplace.git"
+  },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "nft",
+    "telegram"
+  ],
+  "author": "JackBekket (aka zer0-ex)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/MoonSHRD/TelegramNFTMarketplace/issues"
+  },
+  "homepage": "https://github.com/MoonSHRD/TelegramNFTMarketplace#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@openzeppelin/contracts": "^4.8.0",
+    "hardhat": "^2.12.3"
+  }
+}
