@@ -48,8 +48,8 @@ contract MetaMarketplace is ERC165, Ownable {
         CurrenciesERC20.CurrencyERC20 currencyUsed;
     }
 
-    // MSNFT, 721Enumerable,721Metadata, erc721(common)
-    enum NftType {MoonShard, Enum, Meta, Common}
+    // MSNFT, 721Enumerable,721Metadata, erc721(common) // TODO: delete MoonShard type, add Telegram type and URIStorage general type
+    enum NftType {Telegram, Enum, Meta, Common,URIStorage}
 
     struct Marketplace {
         // Store all active sell offers  and maps them to their respective token ids
@@ -65,6 +65,9 @@ contract MetaMarketplace is ERC165, Ownable {
         // defines which interface to use for interaction with NFT
         NftType nft_standard;
         bool initialized;
+
+        //TODO : add royalties reciver address and royalties fee percentage here
+        // this value can be hold by *owners of collection*
     }
 
     // from nft token contract address to marketplace
@@ -85,7 +88,8 @@ contract MetaMarketplace is ERC165, Ownable {
     bytes4 private constant _INTERFACE_ID_MSNFT = 0x780e9d63;
     bytes4 private constant _INTERFACE_ID_IERC721ENUMERABLE = 0x780e9d63;
     bytes4 private constant _INTERFACE_ID_IERC721METADATA = 0x5b5e139f;
-    bytes4 private constant _INTERFACE_ID_IERC721= 0x80ac58cd;      
+    bytes4 private constant _INTERFACE_ID_IERC721= 0x80ac58cd;    
+    // TODO: add InterfaceID to URIStorage, Telegram
     //bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
 
@@ -99,13 +103,14 @@ contract MetaMarketplace is ERC165, Ownable {
     event Sale(address nft_contract_, uint256 tokenId, address seller, address buyer, uint256 value);
     
 
-    constructor(address currency_contract_, address msnft_token_,address payable treasure_fund_) 
+    constructor(address currency_contract_, address telegram_collection_,address payable treasure_fund_) 
     {
         _currency_contract = CurrenciesERC20(currency_contract_);
-        require(_checkStandard(msnft_token_, NftType.MoonShard), "Standard not supported");
-        SetUpMarketplace(msnft_token_, NftType.MoonShard);      // set up MSNFT ready for sale
+        require(_checkStandard(telegram_collection_, NftType.Telegram), "Standard not supported");
+        SetUpMarketplace(telegram_collection_, NftType.Telegram);      // set up Telegram ready for sale
         _treasure_fund = treasure_fund_;
     }
+
 
 
     function SetUpMarketplace(address nft_token_, NftType standard_) public 
@@ -123,6 +128,7 @@ contract MetaMarketplace is ERC165, Ownable {
     *   @notice check if contract support specific nft standard
     *   @param standard_ is one of ERC721 standards (MSNFT, 721Enumerable,721Metadata, erc721(common))
     *   it will return false if contract not support specific interface
+    *   TODO: add check for URIStorage!
     */
     function _checkStandard(address contract_, NftType standard_) internal view returns (bool) {
 
@@ -187,14 +193,14 @@ contract MetaMarketplace is ERC165, Ownable {
 
 
     // deduct royalties, if NFT is created in MoonShard, then applicate +1.5% royalties fee to author of nft
-    function _deductRoyalties(address nft_token_contract_, uint256 token_id_, uint256 grossSaleValue) internal view returns (address royalties_reciver,uint256 royalties_amount) {
+    function _deductRoyalties(address nft_token_contract_, uint256 grossSaleValue) internal view returns (address royalties_reciver,uint256 royalties_amount) {
 
         // check nft type
         NftType standard = Marketplaces[nft_token_contract_].nft_standard;
-        if (standard == NftType.MoonShard) 
+        if (standard == NftType.Telegram) 
         {
-           // royalties_reciver = MSNFT(nft_token_contract_).get_author_by_token_id(token_id_);
-           // royalties_amount = calculateFee(grossSaleValue,1000);
+            royalties_reciver = _treasure_fund;
+            royalties_amount = calculateFee(grossSaleValue,1000);
         } else
         // TODO: Extend work with royalties for telegram collection and user collections
         {
@@ -431,7 +437,7 @@ contract MetaMarketplace is ERC165, Ownable {
         // check royalties
         address r_reciver;
         uint256 r_amount;
-        (r_reciver,r_amount) = _deductRoyalties(nft_contract_,tokenId,amount);
+        (r_reciver,r_amount) = _deductRoyalties(nft_contract_,amount);
 
         uint256 net_amount = amount - fees - r_amount;
         require(_currency_token.transferFrom(from_, address(this), amount), "MetaMarketplace: ERC20: transferFrom buyer to metamarketplace contract failed ");  // pull funds
@@ -466,7 +472,7 @@ contract MetaMarketplace is ERC165, Ownable {
         // check royalties
         address r_reciver;
         uint256 r_amount;
-        (r_reciver,r_amount) = _deductRoyalties(nft_contract_,tokenId,amount);
+        (r_reciver,r_amount) = _deductRoyalties(nft_contract_, amount);
 
         uint256 net_amount = amount - fees - r_amount;
         _currency_token.transfer(to_, net_amount);      // forward funds

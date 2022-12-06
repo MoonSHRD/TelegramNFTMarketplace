@@ -42,7 +42,7 @@ interface IMetaMarketplace {
     }
 
     // MSNFT, 721Enumerable,721Metadata, erc721(common)
-    enum NftType {MoonShard, Enum, Meta, Common}
+    enum NftType {Telegram, Enum, Meta, Common, URIStorage}
 
     struct Marketplace {
         // Store all active sell offers  and maps them to their respective token ids
