@@ -2,15 +2,29 @@ pragma solidity ^0.8.0;
 
 // SPDX-License-Identifier: UNLICENSED
 
-
+//../node_modules/
 import './CurrenciesERC20.sol';
+import "./interfaces/IMetaMarketplace.sol";
+
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-//import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
-import "./interfaces/IMetaMarketplace.sol";
+
+
+// direct imports
+/*
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "../node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol";
+*/
+
+
+
+
 //import "@openzeppelin/contracts/access/Ownable.sol";
 
 
