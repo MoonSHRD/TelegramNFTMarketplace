@@ -16,6 +16,7 @@ contract InterfaceRegister {
     // bytes4 private _INTERFACE_ID_ERC721METADATA = 0x5b5e139f; // 0x5b5e139f
     bytes4 public _INTERFACE_ID_IERC721METADATA; // 0x5b5e139f
     bytes4 public _INTERFACE_ID_IERC721; // 0x80ac58cd
+    bytes4 public _INTERFACE_ID_IERC721URISTORAGE;
 
     function getInterfaceEnumerable() public view returns (bytes4) {
         return _INTERFACE_ID_IERC721ENUMERABLE;
@@ -56,6 +57,20 @@ contract InterfaceRegister {
     function calculateIERC721Metadata() public pure returns (bytes4) {
         IERC721Metadata i;
         return i.name.selector ^ i.symbol.selector ^ i.tokenURI.selector;
+    }
+
+    function calculateIERC721URIStorage() public pure returns (bytes4){
+       bytes4(keccak256("balanceOf(address)")) ^
+            bytes4(keccak256("ownerOf(uint256)")) ^
+            bytes4(keccak256("approve(address,uint256)")) ^
+            bytes4(keccak256("getApproved(uint256)")) ^
+            bytes4(keccak256("setApprovalForAll(address,bool)")) ^
+            bytes4(keccak256("isApprovedForAll(address,address)")) ^
+            bytes4(keccak256("transferFrom(address,address,uint256)")) ^
+            bytes4(keccak256("safeTransferFrom(address,address,uint256)")) ^
+            bytes4(keccak256("safeTransferFrom(address,address,uint256,bytes)") ^
+            bytes4(keccak256("tokenURI(uint256)")) 
+            ); 
     }
 
     function calculateIERC721() public pure returns (bytes4) {
@@ -133,6 +148,7 @@ contract InterfaceRegister {
     constructor() {
         _INTERFACE_ID_IERC721ENUMERABLE = calculateIERC721Enumarable();
         _INTERFACE_ID_IERC721METADATA = calculateIERC721Metadata();
+        _INTERFACE_ID_IERC721URISTORAGE = calculateIERC721URIStorage();
         _INTERFACE_ID_IERC721 = calculateIERC721();
         _INTERFACE_ID_MSNFT = calculateMSNFT();
         _INTERFACE_ID_META_MARKETPLACE = calculateMetaMarketplace();
