@@ -4,11 +4,7 @@ pragma solidity ^0.8.0;
 
 //import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "./interfaces/ICurrenciesERC20.sol";
-//import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-//import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-//import "../../../node_modules/@openzeppelin/contracts/utils/Counters.sol";
-//import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
@@ -34,9 +30,9 @@ contract CurrenciesERC20 is ReentrancyGuard, Ownable, ERC165 {
         USDT,
         USDC,
         DAI,
-        MST,
         WETH,
-        WBTC
+        WBTC,
+        VXPPL
     }
 
     struct CurrencyERC20_Custom {
@@ -89,8 +85,8 @@ contract CurrenciesERC20 is ReentrancyGuard, Ownable, ERC165 {
         address US_Circle,
         address DAI,
         address W_Ethereum,
-        address MST,
-        address WBTC
+        address WBTC,
+        address VXPPL
     ) {
         require(US_Tether != address(0), "USDT contract address is zero!");
         require(US_Circle != address(0), "US_Circle contract address is zero!");
@@ -99,7 +95,6 @@ contract CurrenciesERC20 is ReentrancyGuard, Ownable, ERC165 {
             W_Ethereum != address(0),
             "W_Ethereum contract address is zero!"
         );
-        require(MST != address(0), "MST contract address is zero!");
         require(WBTC != address(0), "WBTC contract address is zero!");
 
         _currencies_hardcoded[CurrencyERC20.USDT] = IERC20Metadata(US_Tether);
@@ -107,14 +102,10 @@ contract CurrenciesERC20 is ReentrancyGuard, Ownable, ERC165 {
         _currencies_hardcoded[CurrencyERC20.USDC] = IERC20Metadata(US_Circle);
         _currencies_hardcoded[CurrencyERC20.DAI] = IERC20Metadata(DAI);
         _currencies_hardcoded[CurrencyERC20.WETH] = IERC20Metadata(W_Ethereum);
-        _currencies_hardcoded[CurrencyERC20.MST] = IERC20Metadata(MST);
         _currencies_hardcoded[CurrencyERC20.WBTC] = IERC20Metadata(WBTC);
+        _currencies_hardcoded[CurrencyERC20.VXPPL] = IERC20Metadata(VXPPL);
 
-        // AddCustomCurrency(US_Tether);
-        // AddCustomCurrency(US_Circle);
-        // AddCustomCurrency(DAI);
-        // AddCustomCurrency(W_Ethereum);
-        AddCustomCurrency(MST);
+
     }
 
     function get_hardcoded_currency(CurrencyERC20 currency)

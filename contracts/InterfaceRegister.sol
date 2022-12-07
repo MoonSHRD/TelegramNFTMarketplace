@@ -60,6 +60,7 @@ contract InterfaceRegister {
     }
 
     function calculateIERC721URIStorage() public pure returns (bytes4){
+       return
        bytes4(keccak256("balanceOf(address)")) ^
             bytes4(keccak256("ownerOf(uint256)")) ^
             bytes4(keccak256("approve(address,uint256)")) ^

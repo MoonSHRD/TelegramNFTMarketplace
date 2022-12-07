@@ -6,6 +6,7 @@ pragma solidity ^0.8.0;
 import './CurrenciesERC20.sol';
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 //import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
@@ -68,6 +69,8 @@ contract MetaMarketplace is ERC165, Ownable {
 
         //TODO : add royalties reciver address and royalties fee percentage here
         // this value can be hold by *owners of collection*
+        address payable collectionOwner;
+        uint ownerFee;
     }
 
     // from nft token contract address to marketplace
@@ -107,28 +110,45 @@ contract MetaMarketplace is ERC165, Ownable {
     {
         _currency_contract = CurrenciesERC20(currency_contract_);
         require(_checkStandard(telegram_collection_, NftType.Telegram), "Standard not supported");
-        SetUpMarketplace(telegram_collection_, NftType.Telegram);      // set up Telegram ready for sale
+        SetUpMarketplace(telegram_collection_, NftType.Telegram,treasure_fund_,30);      // set up Telegram ready for sale
         _treasure_fund = treasure_fund_;
     }
 
 
 
-    function SetUpMarketplace(address nft_token_, NftType standard_) public 
+    function SetUpMarketplace(address nft_contract_, NftType standard_, address payable collection_owner_, uint collection_fee_) public 
     {   
-        require(Marketplaces[nft_token_].initialized == false, "Marketplace is already setted up");
+        require(Marketplaces[nft_contract_].initialized == false, "Marketplace is already setted up");
 
-        Marketplace storage metainfo = Marketplaces[nft_token_];
+        Marketplace storage metainfo = Marketplaces[nft_contract_];
         metainfo.nft_standard = standard_;
         metainfo.initialized = true;
+        metainfo.collectionOwner = collection_owner_;
+        metainfo.ownerFee = collection_fee_; 
     }
 
+    // admin can change royalties reciver and fee in extreme cases
+    function editMarketplace(address nft_contract_, address payable collection_owner_, uint collection_fee_) onlyOwner public {
+        require(Marketplaces[nft_contract_].initialized == true, "Marketplace is not exist yet");
+        Marketplace storage metainfo = Marketplaces[nft_contract_];
+        metainfo.collectionOwner = collection_owner_;
+        metainfo.ownerFee = collection_fee_; 
+    }
 
+    /**
+     *  @dev set service global fee (onlyOwner)
+     */
+    function SetServiceFee(uint promille_fee_, address payable treasure_fund_) onlyOwner public
+    {
+        promille_fee = promille_fee_;
+        _treasure_fund = treasure_fund_;
+    }
 
     /**
     *   @notice check if contract support specific nft standard
     *   @param standard_ is one of ERC721 standards (MSNFT, 721Enumerable,721Metadata, erc721(common))
     *   it will return false if contract not support specific interface
-    *   TODO: add check for URIStorage!
+    *   
     */
     function _checkStandard(address contract_, NftType standard_) internal view returns (bool) {
 
@@ -146,6 +166,16 @@ contract MetaMarketplace is ERC165, Ownable {
         if (standard_ == NftType.Common) {
             (bool success) = IERC721(contract_).
             supportsInterface(_INTERFACE_ID_IERC721);
+            return success;
+        }
+        if (standard_ == NftType.Telegram) {             // Telegram is URIStorage
+            (bool success) = IERC721Metadata(contract_).  
+            supportsInterface(_INTERFACE_ID_IERC721METADATA);
+            return success;
+        }
+        if(standard_ == NftType.URIStorage) {           // URIStorage is MetaData
+            (bool success) = IERC721Metadata(contract_).
+            supportsInterface(_INTERFACE_ID_IERC721METADATA);
             return success;
         }
     }
@@ -192,7 +222,7 @@ contract MetaMarketplace is ERC165, Ownable {
     }
 
 
-    // deduct royalties, if NFT is created in MoonShard, then applicate +1.5% royalties fee to author of nft
+    // deduct royalties, Service fee is promille_fee (taken when sale) + royalties to those who setted up marketplace
     function _deductRoyalties(address nft_token_contract_, uint256 grossSaleValue) internal view returns (address royalties_reciver,uint256 royalties_amount) {
 
         // check nft type
@@ -202,10 +232,11 @@ contract MetaMarketplace is ERC165, Ownable {
             royalties_reciver = _treasure_fund;
             royalties_amount = calculateFee(grossSaleValue,1000);
         } else
-        // TODO: Extend work with royalties for telegram collection and user collections
         {
-            royalties_reciver = address (0x0);
-            royalties_amount = 0;
+            Marketplace storage m = Marketplaces[nft_token_contract_];
+            royalties_reciver = m.collectionOwner;
+            uint256 royalties_ct = m.ownerFee;
+            royalties_amount = calculateAbstractFee(grossSaleValue,1000,royalties_ct);
         }
            return (royalties_reciver,royalties_amount);
     }
@@ -415,6 +446,13 @@ contract MetaMarketplace is ERC165, Ownable {
         return a * c * scale + a * d + b * c + (b * d + scale - 1) / scale;
     }
 
+    function calculateAbstractFee(uint256 amount, uint256 scale, uint256 promille_fee_) public pure returns(uint256) {
+        uint a = amount / scale;
+        uint b = amount % scale;
+        uint c = promille_fee_ / scale;
+        uint d = promille_fee_ % scale;
+        return a * c * scale + a * d + b * c + (b * d + scale - 1) / scale;
+    }
 
 
     /**
@@ -521,7 +559,7 @@ contract MetaMarketplace is ERC165, Ownable {
     modifier isMarketable(uint256 tokenId, address nft_contract_) {
         require(Marketplaces[nft_contract_].initialized == true,
             "Marketplace for this token is not setup yet!");
-        IERC721Enumerable token = IERC721Enumerable(nft_contract_);
+        IERC721 token = IERC721(nft_contract_);
         require(token.getApproved(tokenId) == address(this),
             "Not approved");
         _;
