@@ -16,7 +16,7 @@ interface Props {
 declare let window: any;
 
 
-export default function MakeSellOffer(props:Props){
+export default function MakeBuyOffer(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
   const marketAddress = props.marketAddress
@@ -55,7 +55,7 @@ export default function MakeSellOffer(props:Props){
   }, []);
   
 
-  async function makeSellOffer(event:React.FormEvent) {
+  async function makeBuyOffer(event:React.FormEvent) {
     event.preventDefault()
     if(!window.ethereum) return    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -65,10 +65,10 @@ export default function MakeSellOffer(props:Props){
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
  
-    MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency)
+    MetaMarketplace.makeBuyOffer(collection_address,token_id,currency,price)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
-        tr.wait().then((receipt:TransactionReceipt) => {console.log("make sell offer receipt", receipt)})
+        tr.wait().then((receipt:TransactionReceipt) => {console.log("make buy offer receipt", receipt)})
         })
          .catch((e:Error) => console.log(e))
      }
@@ -78,12 +78,12 @@ export default function MakeSellOffer(props:Props){
   //const handleChange = (value:string) => setUserId(value)   
   
   return (
-    <form onSubmit={makeSellOffer}>
+    <form onSubmit={makeBuyOffer}>
     <FormControl>
       <FormLabel >Sell your nft: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
      
-     <Input id="price" type="text" placeholder="minimum/floor price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
+     <Input id="price" type="text" placeholder="bid price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
      <div>
      <Select id="currency" placeholder="Select currency you want to accept:" onChange={(e) => setCurrency(e.target.value)} value= {currency}  my={3}>
@@ -96,7 +96,7 @@ export default function MakeSellOffer(props:Props){
       </Select>
      </div>
       <div>
-        <Text><b>Token id to sell</b>:{token_id}</Text>
+        <Text><b>Token id to buy</b>:{token_id}</Text>
         <Text><b>Marketplace address</b>:{addressContract}</Text>
     </div>
       <Button type="submit" isDisabled={!currentAccount}>Approve</Button>

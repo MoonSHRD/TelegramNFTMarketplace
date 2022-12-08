@@ -16,7 +16,7 @@ interface Props {
 declare let window: any;
 
 
-export default function MakeSellOffer(props:Props){
+export default function AcceptBuyOffer(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
   const marketAddress = props.marketAddress
@@ -30,23 +30,41 @@ export default function MakeSellOffer(props:Props){
 
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
+  const queryParams = new URLSearchParams(location.search);
 
+    if(!window.ethereum) return
 
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
   
   var token_id_q = queryParams.get('token_id'); // amount MUST be in wei format
   let token_id_n : number = +token_id_q;
   setTokenId(token_id_n);
 
-  
-  var p = queryParams.get('min_price');
+  var p = queryParams.get('price');
   var a_ether = ethers.utils.formatEther(p);
   setHuman_number(a_ether);
-  
+  setPrice(p);
 
   var ac_q = queryParams.get('collection_contract_address'); // erc20 to approve
   var ac_a = ethers.utils.getAddress(ac_q);
   setCollectionAddress(ac_a);
+  
+  var c = queryParams.get('currency');
+  setCurrency(c);
+
+
+  /*
+  const MetaMarketplace = new ethers.Contract(addressContract, abi, provider);
+  MetaMarketplace.getLastPrice(collection_address,token_id_q).then((result:string)=>{
+        console.log(result)
+        
+        setPrice(result)
+    }).catch('error', console.error)
+*/
+ 
+  
+
+
 
   
   
@@ -55,7 +73,7 @@ export default function MakeSellOffer(props:Props){
   }, []);
   
 
-  async function makeSellOffer(event:React.FormEvent) {
+  async function acceptBuyOffer(event:React.FormEvent) {
     event.preventDefault()
     if(!window.ethereum) return    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -65,10 +83,10 @@ export default function MakeSellOffer(props:Props){
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
  
-    MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency)
+    MetaMarketplace.acceptBuyOffer(collection_address,token_id,currency)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
-        tr.wait().then((receipt:TransactionReceipt) => {console.log("make sell offer receipt", receipt)})
+        tr.wait().then((receipt:TransactionReceipt) => {console.log("accept buy offer receipt", receipt)})
         })
          .catch((e:Error) => console.log(e))
      }
@@ -78,26 +96,18 @@ export default function MakeSellOffer(props:Props){
   //const handleChange = (value:string) => setUserId(value)   
   
   return (
-    <form onSubmit={makeSellOffer}>
+    <form onSubmit={acceptBuyOffer}>
     <FormControl>
       <FormLabel >Sell your nft: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
      
-     <Input id="price" type="text" placeholder="minimum/floor price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
+      
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
-     <div>
-     <Select id="currency" placeholder="Select currency you want to accept:" onChange={(e) => setCurrency(e.target.value)} value= {currency}  my={3}>
-      <option value='0'>USDT</option>
-      <option value='1'>USDC</option>
-      <option value='2'>DAI</option>
-      <option value='3'>WETH</option>
-      <option value='4'>WBTC</option>
-      <option value='5'>VXPPL</option>
-      </Select>
-     </div>
+
       <div>
         <Text><b>Token id to sell</b>:{token_id}</Text>
-        <Text><b>Marketplace address</b>:{addressContract}</Text>
+        <Text><b>Price</b>:{price}</Text>
+        <Text><b>Currency</b>:{currency}</Text>
     </div>
       <Button type="submit" isDisabled={!currentAccount}>Approve</Button>
     </FormControl>
