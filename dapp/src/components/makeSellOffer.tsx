@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Button, Input , NumberInput,  NumberInputField,  FormControl,  FormLabel, Text } from '@chakra-ui/react'
+import {Button, Input , NumberInput,  NumberInputField,  FormControl,  FormLabel, Text, Select } from '@chakra-ui/react'
 import {ethers} from 'ethers'
 import {parseEther } from 'ethers/lib/utils'
 import {abi} from '../../../artifacts/contracts/MetaMarketplace.sol/MetaMarketplace.json'
@@ -55,7 +55,7 @@ export default function MakeSellOffer(props:Props){
   }, []);
   
 
-  async function approveSingleton(event:React.FormEvent) {
+  async function makeSellOffer(event:React.FormEvent) {
     event.preventDefault()
     if(!window.ethereum) return    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -65,10 +65,6 @@ export default function MakeSellOffer(props:Props){
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
  
-   // let passport_fee_wei = ethers.utils.formatUnits(1000,"wei");
-    //let passport_fee_custom_gwei = ethers.utils.formatUnits(2000000,"gwei"); // 1 gwei = 1'000'000'000 wei, 2m gwei = 0,002 (estimateGas on approval = 0.02, so we need to take that fee for gas)
-    //let passport_fee_wei = ethers.utils.formatUnits(passport_fee_custom_gwei,"wei");
-    //let passport_fee_wei_hardcode = ethers.utils.formatUnits(2000000000000000,"wei");
     MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
@@ -79,10 +75,10 @@ export default function MakeSellOffer(props:Props){
 
 
   
-  //const handleChange = (value:string) => setUserId(value)   setCurrency
+  //const handleChange = (value:string) => setUserId(value)   
   
   return (
-    <form onSubmit={approveSingleton}>
+    <form onSubmit={makeSellOffer}>
     <FormControl>
       <FormLabel >Sell your nft: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
@@ -90,18 +86,14 @@ export default function MakeSellOffer(props:Props){
      <Input id="price" type="text" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
      <div>
-     <Input id="currency_USDT" type="radio" required  name="currency_radio" onChange={(e) => setCurrency(e.target.value)} value={0}   />
-     <label for="currency_USDT">USDT</label>
-     <Input id="currency_USDC" type="radio"  name="currency_radio" onChange={(e) => setCurrency(e.target.value)} value={1}   />
-     <label for="currency_USDC">USDC</label>
-     <Input id="currency_DAI" type="radio"  name="currency_radio" onChange={(e) => setCurrency(e.target.value)} value={2}   />
-     <label for="currency_DAI">DAI</label>
-     <Input id="currency_WETH" type="radio"  name="currency_radio" onChange={(e) => setCurrency(e.target.value)} value={3}   />
-     <label for="currency_WETH">WETH</label>
-     <Input id="currency_WBTC" type="radio"  name="currency_radio" onChange={(e) => setCurrency(e.target.value)} value={4}   />
-     <label for="currency_WBTC">WBTC</label>
-     <Input id="currency_VXPPL" type="radio"  name="currency_radio" onChange={(e) => setCurrency(e.target.value)} value={5}   />
-     <label for="currency_VXPPL">VXPPL</label>
+     <Select id="currency" placeholder="Select currency you want to accept:" onChange={(e) => setCurrency(e.target.value)} value= {currency}  my={3}>
+      <option value='0'>USDT</option>
+      <option value='1'>USDC</option>
+      <option value='2'>DAI</option>
+      <option value='3'>WETH</option>
+      <option value='4'>WBTC</option>
+      <option value='5'>VXPPL</option>
+      </Select>
      </div>
       <div>
         <Text><b>Token id to approve</b>:{token_id}</Text>
