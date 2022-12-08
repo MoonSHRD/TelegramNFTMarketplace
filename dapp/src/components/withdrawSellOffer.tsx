@@ -16,14 +16,14 @@ interface Props {
 declare let window: any;
 
 
-export default function AcceptBuyOffer(props:Props){
+export default function WithdrawSellOffer(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
   const marketAddress = props.marketAddress
   //var [user_id, setUserId] = useState(0)
   //var [user_name, setUserName] = useState<string>("")
-  var [currency, setCurrency] = useState(0) // TODO: fix it to work as input option
-  var [price,setPrice] = useState<string>("")
+
+
   var [human_number,setHuman_number] = useState<string>("")
   var [token_id,setTokenId] = useState(0)
   var [collection_address, setCollectionAddress] = useState<string>("")
@@ -40,17 +40,12 @@ export default function AcceptBuyOffer(props:Props){
   let token_id_n : number = +token_id_q;
   setTokenId(token_id_n);
 
-  var p = queryParams.get('price');
-  var a_ether = ethers.utils.formatEther(p);
-  setHuman_number(a_ether);
-  setPrice(p);
 
   var ac_q = queryParams.get('collection_contract_address'); // erc20 to approve
   var ac_a = ethers.utils.getAddress(ac_q);
   setCollectionAddress(ac_a);
   
-  var c = queryParams.get('currency');
-  setCurrency(c);
+
 
 
   /*
@@ -73,7 +68,7 @@ export default function AcceptBuyOffer(props:Props){
   }, []);
   
 
-  async function acceptBuyOffer(event:React.FormEvent) {
+  async function withdrawSellOffer(event:React.FormEvent) {
     event.preventDefault()
     if(!window.ethereum) return    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -83,10 +78,10 @@ export default function AcceptBuyOffer(props:Props){
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
  
-    MetaMarketplace.acceptBuyOffer(collection_address,token_id,currency)
+    MetaMarketplace.withdrawSellOffer(collection_address,token_id)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
-        tr.wait().then((receipt:TransactionReceipt) => {console.log("accept buy offer receipt", receipt)})
+        tr.wait().then((receipt:TransactionReceipt) => {console.log("withdraw sell offer receipt", receipt)})
         })
          .catch((e:Error) => console.log(e))
      }
@@ -96,20 +91,15 @@ export default function AcceptBuyOffer(props:Props){
   //const handleChange = (value:string) => setUserId(value)   
   
   return (
-    <form onSubmit={acceptBuyOffer}>
+    <form onSubmit={withdrawSellOffer}>
     <FormControl>
       <FormLabel >Sell your nft: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
-     
-      
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
-
       <div>
         <Text><b>Token id to sell</b>:{token_id}</Text>
-        <Text><b>Price</b>:{price}</Text>
-        <Text><b>Currency</b>:{currency}</Text>
     </div>
-      <Button type="submit" isDisabled={!currentAccount}>Sell</Button>
+      <Button type="submit" isDisabled={!currentAccount}>Put off sale</Button>
     </FormControl>
     </form>
   )

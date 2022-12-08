@@ -32,7 +32,7 @@ import "../node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 /**
  * @title NFT MetaMarketplace with ERC-165 support
- * @author JackBekket
+ * @author JackBekket https://github.com/JackBekket
  * original idea from https://github.com/benber86/nft_royalties_market
  * @notice Defines a marketplace to bid on and sell NFTs.
  *         each marketplace is a struct tethered to nft-token contract

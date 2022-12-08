@@ -99,7 +99,7 @@ export default function MakeBuyOffer(props:Props){
         <Text><b>Token id to buy</b>:{token_id}</Text>
         <Text><b>Marketplace address</b>:{addressContract}</Text>
     </div>
-      <Button type="submit" isDisabled={!currentAccount}>Approve</Button>
+      <Button type="submit" isDisabled={!currentAccount}>Offer buy</Button>
     </FormControl>
     </form>
   )

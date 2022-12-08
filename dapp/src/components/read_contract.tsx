@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from 'react';
 import {Text} from '@chakra-ui/react'
 //import {ERC20ABI as abi} from 'abi/ERC20ABI'
-import {abi} from '../../../artifacts/contracts/TGPassport.sol/TGPassport.json'
+import {abi} from '../../../artifacts/contracts/MetaMarketplace.sol/MetaMarketplace.json'
 
 import {Contract, ethers} from 'ethers'
 
@@ -13,54 +13,52 @@ interface Props {
 
 declare let window: any;
 
-export default function ReadPassportContract(props:Props){
+export default function ReadLastOffer(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
-  const [totalSupply,setTotalSupply]=useState<string>()
-  const [symbol,setSymbol]= useState<string>("")
-  const [owner, setOwnerValue] = useState<string>()
-  const [pfee, setPassportFee] = useState<string>()
-
+  var [currency, setCurrency] = useState(0) // TODO: fix it to work as input option
+  var [price,setPrice] = useState<string>("")
+  var [human_number,setHuman_number] = useState<string>("")
+  var [token_id,setTokenId] = useState(0)
+  var [collection_address, setCollectionAddress] = useState<string>("")
 
   // called only once, use it as constructor
   useEffect( () => {
     if(!window.ethereum) return
 
+    const queryParams = new URLSearchParams(location.search);
+
+    var ac_q = queryParams.get('collection_contract_address'); // erc20 to approve
+    var ac_a = ethers.utils.getAddress(ac_q);
+    setCollectionAddress(ac_a);
+
+
+    var token_id_q = queryParams.get('token_id'); // amount MUST be in wei format
+    let token_id_n : number = +token_id_q;
+    setTokenId(token_id_n);
+
     const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const TGPassport = new ethers.Contract(addressContract, abi, provider);
-    TGPassport.GetOwner().then((result:string)=>{
+    const MetaMarketplace = new ethers.Contract(addressContract, abi, provider);
+    MetaMarketplace.getLastPrice(collection_address,token_id).then((result:string)=>{
         console.log(result)
         
-        setOwnerValue(result)
+       // setOwnerValue(result)
+       // setPrice(result[0])
+       // setCurrency(result[1])
     }).catch('error', console.error)
 
-    TGPassport.GetPassportFee().then((result:string)=>{
-       // console.log(result);
-      //  console.log(ethers.utils.formatEther(result));
-        setPassportFee(ethers.utils.formatEther(result))
-    }).catch('error', console.error);
 
-    /*
-    erc20.totalSupply().then((result:string)=>{
-        setTotalSupply(ethers.utils.formatEther(result))
-    }).catch('error', console.error);
-    */
+
     //called only once
   },[])  
 
   return (
-    /**
-    <div>
-        <Text><b>Telegram Passport Contract</b>: {addressContract}</Text>
-        <Text><b>ClassToken totalSupply</b>:{totalSupply} {symbol}</Text>
-        <Text my={4}><b>ClassToken in current account</b>:</Text>
-    </div>
-    */
+
 
     <div>
-        <Text><b>Telegram Passport Contract</b>: {addressContract}</Text>
-        <Text><b>Owner of contract</b>:{owner}</Text>
-        <Text><b>Fee for appling passport</b>:{pfee}</Text>
+        <Text><b>Marketplace address</b>: {addressContract}</Text>
+        <Text><b>Last price</b>:{price}</Text>
+        <Text><b>Last currency</b>:{currency}</Text>
     </div>
 
   )

@@ -22,11 +22,13 @@ export default function AcceptBuyOffer(props:Props){
   const marketAddress = props.marketAddress
   //var [user_id, setUserId] = useState(0)
   //var [user_name, setUserName] = useState<string>("")
-  var [currency, setCurrency] = useState(0) // TODO: fix it to work as input option
-  var [price,setPrice] = useState<string>("")
+ // var [currency, setCurrency] = useState(0) // TODO: fix it to work as input option
+ // var [price,setPrice] = useState<string>("")
   var [human_number,setHuman_number] = useState<string>("")
-  var [token_id,setTokenId] = useState(0)
+ // var [token_id,setTokenId] = useState(0)
   var [collection_address, setCollectionAddress] = useState<string>("")
+  var [owner_address, setOwnerAddress] = useState<string>("")
+  var [fee, setFee] = useState<string>("")
 
 
   useEffect(() => {

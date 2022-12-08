@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 /**
  *      CurrenciesERC20
  * @title CurrenciesERC20
- * @author JackBekket
+ * @author JackBekket https://github.com/JackBekket
  * @dev This contract allow to use erc20 tokens as a currency in crowdsale-like contracts
  *
  */
