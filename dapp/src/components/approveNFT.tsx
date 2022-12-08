@@ -16,7 +16,7 @@ interface Props {
 declare let window: any;
 
 
-export default function ApproveSingleton(props:Props){
+export default function ApproveNFT(props:Props){
   //const addressContract = props.addressContract
   const currentAccount = props.currentAccount
   const marketAddress = props.marketAddress

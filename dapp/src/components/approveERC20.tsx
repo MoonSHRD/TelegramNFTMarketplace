@@ -65,7 +65,7 @@ export default function ApproveERC20(props:Props){
     ERC20_contract.approve(user_address,marketAddress,{value:amount_wei})
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
-        tr.wait().then((receipt:TransactionReceipt) => {console.log("applying receipt", receipt)})
+        tr.wait().then((receipt:TransactionReceipt) => {console.log("approve receipt", receipt)})
         })
          .catch((e:Error) => console.log(e))
      }
