@@ -5,12 +5,7 @@ import { VStack, Heading, Box, LinkOverlay, LinkBox} from "@chakra-ui/layout"
 import { Text, Button } from '@chakra-ui/react'
 import { useState, useEffect} from 'react'
 import {ethers} from "ethers"
-import ReadPassportContract from 'components/read_contract'
-import ApplyPassportTG from 'components/applyPassport'
-import ApprovePassportTG from 'components/approvePassport'
-import DeclinePassportTG from 'components/declinePassport'
-import DeletePassportTG from 'components/deletePassport'
-import GetWalletUserTG from 'components/getWalletUser'
+
 
 declare let window:any
 
@@ -71,7 +66,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>My Telegram Passport</title>
+        <title>NFT Marketplace</title>
       </Head>
 
       <Heading as="h3"  my={4}>Explore Web3</Heading>          
@@ -94,48 +89,8 @@ const Home: NextPage = () => {
         </Box>
         :<></>
         }
-          <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Read ClassToken Info</Heading>
-          <ReadPassportContract 
-            addressContract='0xC14f07F30aBB60F0A143fB99fCc6c1f1a8070567'
-            currentAccount={currentAccount}
-          />
-        </Box>
-        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Attach telegram id and username to your wallet</Heading>
-          <ApplyPassportTG 
-            addressContract='0xC14f07F30aBB60F0A143fB99fCc6c1f1a8070567'
-            currentAccount={currentAccount}
-          />
-        </Box>
-        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Approve user intent for registration personal wallet address</Heading>
-          <ApprovePassportTG 
-            addressContract='0xC14f07F30aBB60F0A143fB99fCc6c1f1a8070567'
-            currentAccount={currentAccount}
-          />
-        </Box>
-        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Decline user intent for registration personal wallet address</Heading>
-          <DeclinePassportTG 
-            addressContract='0xC14f07F30aBB60F0A143fB99fCc6c1f1a8070567'
-            currentAccount={currentAccount}
-          />
-        </Box>
-        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Delete ALREADY APPROVED passport (only for test networks)</Heading>
-          <DeletePassportTG 
-            addressContract='0xC14f07F30aBB60F0A143fB99fCc6c1f1a8070567'
-            currentAccount={currentAccount}
-          />
-        </Box>
-        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Get eth wallet associated with telegram nickname:</Heading>
-          <GetWalletUserTG 
-            addressContract='0xC14f07F30aBB60F0A143fB99fCc6c1f1a8070567'
-            currentAccount={currentAccount}
-          />
-        </Box>      
+
+  
 
 ...
       </VStack>

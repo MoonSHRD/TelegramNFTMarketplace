@@ -16,7 +16,7 @@ interface Props {
 declare let window: any;
 
 
-export default function AcceptBuyOffer(props:Props){
+export default function SetupMarketplace(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
   const marketAddress = props.marketAddress
@@ -29,6 +29,7 @@ export default function AcceptBuyOffer(props:Props){
   var [collection_address, setCollectionAddress] = useState<string>("")
   var [owner_address, setOwnerAddress] = useState<string>("")
   var [fee, setFee] = useState<string>("")
+  var [n_type, setNType] = useState<string>("")
 
 
   useEffect(() => {
@@ -38,21 +39,19 @@ export default function AcceptBuyOffer(props:Props){
 
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   
-  var token_id_q = queryParams.get('token_id'); // amount MUST be in wei format
-  let token_id_n : number = +token_id_q;
-  setTokenId(token_id_n);
+ // var owner_q = queryParams.get('owner');
+  setOwnerAddress(currentAccount);
 
-  var p = queryParams.get('price');
+  var p = queryParams.get('fee');
   var a_ether = ethers.utils.formatEther(p);
   setHuman_number(a_ether);
-  setPrice(p);
+  setFee(p);
 
   var ac_q = queryParams.get('collection_contract_address'); // erc20 to approve
   var ac_a = ethers.utils.getAddress(ac_q);
   setCollectionAddress(ac_a);
   
-  var c = queryParams.get('currency');
-  setCurrency(c);
+
 
 
   /*
@@ -75,20 +74,20 @@ export default function AcceptBuyOffer(props:Props){
   }, []);
   
 
-  async function acceptBuyOffer(event:React.FormEvent) {
+  async function setupMarketplace(event:React.FormEvent) {
     event.preventDefault()
     if(!window.ethereum) return    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
     const user_address = signer._address
     const MetaMarketplace:Contract = new ethers.Contract(addressContract, abi, signer)
-    console.log("token id to interact raw: ", token_id)
+    //console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
  
-    MetaMarketplace.acceptBuyOffer(collection_address,token_id,currency)
+    MetaMarketplace.SetUpMarketplace(collection_address,n_type,owner_address,fee)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
-        tr.wait().then((receipt:TransactionReceipt) => {console.log("accept buy offer receipt", receipt)})
+        tr.wait().then((receipt:TransactionReceipt) => {console.log("setup marketplace receipt", receipt)})
         })
          .catch((e:Error) => console.log(e))
      }
@@ -98,20 +97,22 @@ export default function AcceptBuyOffer(props:Props){
   //const handleChange = (value:string) => setUserId(value)   
   
   return (
-    <form onSubmit={acceptBuyOffer}>
+    <form onSubmit={setupMarketplace}>
     <FormControl>
-      <FormLabel >Sell your nft: </FormLabel>
-      <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
-     
-      
+      <FormLabel >Setup your collection: </FormLabel> 
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
-
+     <Input id="fee" type="number" required  onChange={(e) => setFee(e.target.value)} value={fee} my={3}/>
+     <Select id="n_type" placeholder="Select NFT type:" onChange={(e) => setNType(e.target.value)} value= {n_type}  my={3}>
+      <option value='1'>Enum</option>
+      <option value='2'>Meta</option>
+      <option value='3'>Common</option>
+      <option value='4'>URIStorage</option>
+      </Select>
       <div>
-        <Text><b>Token id to sell</b>:{token_id}</Text>
-        <Text><b>Price</b>:{price}</Text>
-        <Text><b>Currency</b>:{currency}</Text>
+        <Text><b>Owner</b>:{currentAccount}</Text>
+
     </div>
-      <Button type="submit" isDisabled={!currentAccount}>Sell</Button>
+      <Button type="submit" isDisabled={!currentAccount}>Setup</Button>
     </FormControl>
     </form>
   )
