@@ -50,7 +50,8 @@ export default function AcceptBuyOffer(props:Props){
   setCollectionAddress(ac_a);
   
   var c = queryParams.get('currency');
-  setCurrency(c);
+  var c_int = parseInt(c);
+  setCurrency(c_int);
 
 
   /*
