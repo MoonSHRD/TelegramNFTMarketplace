@@ -27,13 +27,19 @@ export default function ReadNFT_Telegram(props:Props){
 
     const queryParams = new URLSearchParams(location.search);
 
-    var token_id_q = queryParams.get('token_id'); // amount MUST be in wei format
-    let token_id_n : number = +token_id_q;
+    var token_id_q = queryParams.get('token_id'); // 
+    console.log("token_id_q: ", token_id_q);
+    
+    let token_id_n  = parseInt(token_id_q);
+    console.log("token_id_n: ", token_id_n);
+    
     setTokenId(token_id_n);
+    console.log("token id: ", token_id);
+    
 
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const ERCMeta = new ethers.Contract(addressContract, abi, provider);
-    ERCMeta.tokenURI(token_id).then((result:string)=>{
+    ERCMeta.tokenURI(token_id_n).then((result:string)=>{
         console.log("uri:");
         
         console.log(result);

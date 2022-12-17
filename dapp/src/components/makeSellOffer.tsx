@@ -11,6 +11,7 @@ interface Props {
     addressContract: string,
     currentAccount: string | undefined
     marketAddress: string
+    collectionContract : string
 }
 
 declare let window: any;
@@ -20,6 +21,7 @@ export default function MakeSellOffer(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
   const marketAddress = props.marketAddress
+  const collectionAddressProp = props.collectionContract
   //var [user_id, setUserId] = useState(0)
   //var [user_name, setUserName] = useState<string>("")
   var [currency, setCurrency] = useState<string>("") // TODO: fix it to work as input option
@@ -39,14 +41,23 @@ export default function MakeSellOffer(props:Props){
   setTokenId(token_id_n);
 
   
+  /*
   var p = queryParams.get('min_price');
   var a_ether = ethers.utils.formatEther(p);
   setHuman_number(a_ether);
+  */
+
   
 
+
   var ac_q = queryParams.get('collection_contract_address'); // erc20 to approve
-  var ac_a = ethers.utils.getAddress(ac_q);
-  setCollectionAddress(ac_a);
+  if (ac_q != null) {
+    var ac_a = ethers.utils.getAddress(ac_q);
+    setCollectionAddress(ac_a);
+  } else {
+    setCollectionAddress(collectionAddressProp)
+  }
+
 
   
   
