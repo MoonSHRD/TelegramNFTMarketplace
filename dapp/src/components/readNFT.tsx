@@ -13,7 +13,7 @@ interface Props {
 
 declare let window: any;
 
-export default function ReadLastOffer(props:Props){
+export default function ReadNFT(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
 

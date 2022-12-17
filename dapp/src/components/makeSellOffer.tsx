@@ -22,7 +22,7 @@ export default function MakeSellOffer(props:Props){
   const marketAddress = props.marketAddress
   //var [user_id, setUserId] = useState(0)
   //var [user_name, setUserName] = useState<string>("")
-  var [currency, setCurrency] = useState(0) // TODO: fix it to work as input option
+  var [currency, setCurrency] = useState<string>("") // TODO: fix it to work as input option
   var [price,setPrice] = useState<string>("")
   var [human_number,setHuman_number] = useState<string>("")
   var [token_id,setTokenId] = useState(0)
@@ -64,8 +64,8 @@ export default function MakeSellOffer(props:Props){
     const MetaMarketplace:Contract = new ethers.Contract(addressContract, abi, signer)
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
- 
-    MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency)
+    var currency_int = parseInt(currency)
+    MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency_int)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then((receipt:TransactionReceipt) => {console.log("make sell offer receipt", receipt)})
