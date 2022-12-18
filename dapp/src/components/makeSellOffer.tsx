@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {Button, Input , NumberInput,  NumberInputField,  FormControl,  FormLabel, Text, Select } from '@chakra-ui/react'
 import {ethers} from 'ethers'
-import {parseEther } from 'ethers/lib/utils'
+import {formatEther, formatUnits, parseEther, parseUnits } from 'ethers/lib/utils'
 import {abi} from '../../../artifacts/contracts/MetaMarketplace.sol/MetaMarketplace.json'
 import { Contract } from "ethers"
 import { TransactionResponse,TransactionReceipt } from "@ethersproject/abstract-provider"
@@ -77,7 +77,17 @@ export default function MakeSellOffer(props:Props){
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
     var currency_int = parseInt(currency)
-    MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency_int,category)
+    console.log("currency int:", currency_int);
+    console.log("min price is: ", price);
+    var price_number = parseFloat(price)
+    console.log("price float is: ", price_number);
+    
+    var price_wei = parseUnits(price, 18)
+    console.log("price wei: ", price_wei);
+    
+    
+    
+    MetaMarketplace.makeSellOffer(token_id,price_wei,collection_address,currency_int,category)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then((receipt:TransactionReceipt) => {console.log("make sell offer receipt", receipt)})
