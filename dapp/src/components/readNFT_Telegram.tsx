@@ -59,11 +59,11 @@ export default function ReadNFT_Telegram(props:Props){
   return (
 
 
-    <div className="grid-element" >
+    <div>
         <Text><b>NFT address</b>: {addressContract}</Text>
         <Text><b>Token ID</b>: {token_id}</Text>
         <Box boxSize='sm'>
-        <Image src={uri} ></Image>
+        <Image src={uri} boxSize='250px' ></Image>
         </Box>
     </div>
 
