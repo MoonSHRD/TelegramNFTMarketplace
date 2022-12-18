@@ -94,7 +94,7 @@ export default function MakeSellOffer(props:Props){
     <FormControl>
       <FormLabel >Sell your nft: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
-     <Input id="category" type="text" required  onChange={(e) => setCategory(e.target.value)} value={category} my={3} />
+     <Input id="category" type="text" placeholder="category" required  onChange={(e) => setCategory(e.target.value)} value={category} my={3} />
      <Input id="price" type="text" placeholder="minimum/floor price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
      <div>
