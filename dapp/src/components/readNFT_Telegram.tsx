@@ -63,7 +63,7 @@ export default function ReadNFT_Telegram(props:Props){
         <Text><b>NFT address</b>: {addressContract}</Text>
         <Text><b>Token ID</b>: {token_id}</Text>
         <Box boxSize='sm'>
-        <Image src={uri} boxSize='250px' ></Image>
+        <Image src={uri} w='100%' h='50%' ></Image>
         </Box>
     </div>
 
