@@ -63,7 +63,7 @@ contract MetaMarketplace is ERC165, Ownable {
         CurrenciesERC20.CurrencyERC20 currencyUsed;
     }
 
-    // MSNFT, 721Enumerable,721Metadata, erc721(common) // TODO: delete MoonShard type, add Telegram type and URIStorage general type
+    // URI, 721Enumerable,721Metadata, erc721(common) // TODO: delete MoonShard type, add Telegram type and URIStorage general type
     enum NftType {Telegram, Enum, Meta, Common,URIStorage}
 
     struct Marketplace {
@@ -111,13 +111,15 @@ contract MetaMarketplace is ERC165, Ownable {
 
 
     // Events
+    event NewSellCategory(string indexed category, address nft_contract_, uint256 tokenId);
     event NewSellOffer(address nft_contract_, uint256 tokenId, address seller, uint256 value);
-    event NewBuyOffer(uint256 tokenId, address buyer, uint256 value);
-    event SellOfferWithdrawn(address nft_contract_, uint256 tokenId, address seller);
-    event BuyOfferWithdrawn(uint256 tokenId, address buyer);
+    event NewBuyOffer(address nft_contract_, uint256 tokenId, address buyer, uint256 value);
+    event SellOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address seller);
+    event BuyOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address buyer);
     event CalculatedFees(uint256 initial_value, uint256 fees, uint256 transfered_amount, address feeAddress);
     event RoyaltiesPaid(address nft_contract_,uint256 tokenId, address recepient, uint value);
-    event Sale(address nft_contract_, uint256 tokenId, address seller, address buyer, uint256 value);
+    event Sale(address indexed nft_contract_, uint256 indexed tokenId, address seller, address buyer, uint256 value);
+    event NewMarketplace(address nft_contract_);
     
 
     constructor(address currency_contract_, address telegram_collection_,address payable treasure_fund_) 
@@ -139,6 +141,7 @@ contract MetaMarketplace is ERC165, Ownable {
         metainfo.initialized = true;
         metainfo.collectionOwner = collection_owner_;
         metainfo.ownerFee = collection_fee_; 
+        emit NewMarketplace(nft_contract_);
     }
 
     // admin can change royalties reciver and fee in extreme cases
@@ -202,7 +205,7 @@ contract MetaMarketplace is ERC165, Ownable {
     * @param minPrice - minimum price at which the token can be sold
     * @param nft_contract_ -- address of nft contract
     */
-    function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, CurrenciesERC20.CurrencyERC20 currency_)
+    function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, CurrenciesERC20.CurrencyERC20 currency_, string memory category_)
     external marketplaceSetted(nft_contract_) isMarketable(tokenId,nft_contract_) tokenOwnerOnly(tokenId,nft_contract_) 
     {
         Marketplace storage metainfo = Marketplaces[nft_contract_];
@@ -212,6 +215,7 @@ contract MetaMarketplace is ERC165, Ownable {
 
         // Broadcast sell offer
         emit NewSellOffer(nft_contract_,tokenId, msg.sender, minPrice);
+        emit NewSellCategory(category_,nft_contract_,tokenId);
     }
 
 
@@ -370,7 +374,7 @@ contract MetaMarketplace is ERC165, Ownable {
 
 
         // Broadcast the buy offer
-        emit NewBuyOffer(tokenId, msg.sender, bid_price_);
+        emit NewBuyOffer(token_contract_,tokenId, msg.sender, bid_price_);
     }
 
     
@@ -399,7 +403,7 @@ contract MetaMarketplace is ERC165, Ownable {
         delete(metainfo.activeBuyOffers[tokenId][currency_]);
 
         // Broadcast offer withdrawal
-        emit BuyOfferWithdrawn(tokenId, msg.sender);
+        emit BuyOfferWithdrawn(token_contract_,tokenId, msg.sender);
     }
 
 

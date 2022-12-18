@@ -29,6 +29,7 @@ export default function MakeSellOffer(props:Props){
   var [human_number,setHuman_number] = useState<string>("")
   var [token_id,setTokenId] = useState(0)
   var [collection_address, setCollectionAddress] = useState<string>("")
+  var [category, setCategory] = useState<string>("")
 
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function MakeSellOffer(props:Props){
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
     var currency_int = parseInt(currency)
-    MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency_int)
+    MetaMarketplace.makeSellOffer(token_id,price,collection_address,currency_int,category)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then((receipt:TransactionReceipt) => {console.log("make sell offer receipt", receipt)})
@@ -93,7 +94,7 @@ export default function MakeSellOffer(props:Props){
     <FormControl>
       <FormLabel >Sell your nft: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
-     
+     <Input id="category" type="text" required  onChange={(e) => setCategory(e.target.value)} value={category} my={3} />
      <Input id="price" type="text" placeholder="minimum/floor price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
      <div>

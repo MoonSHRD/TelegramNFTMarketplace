@@ -66,7 +66,7 @@ export default function MakeBuyOffer(props:Props){
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
     var currency_int = parseInt(currency)
-    MetaMarketplace.purchase(collection_address,token_id,currency,price)
+    MetaMarketplace.purchase(collection_address,token_id,currency_int,price)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then((receipt:TransactionReceipt) => {console.log("purchase receipt", receipt)})

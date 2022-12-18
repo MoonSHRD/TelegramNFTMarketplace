@@ -1,5 +1,6 @@
 Singleton Collection deployed to: 0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e
 Factory NFT deployed to: 0xd2026ff372E52d1961276313dC4e3d202995c3Ef
-Our currency deployed to:  0x9024cF0a889233Af1fd4afaF949d5aF8C633D7fc
-Currencies util contract deployed to: 0x81b13480622367EF2Fc4aA322e2D915ABab1755a
-MetaMarketplace deployed to: 0x87da345d041359d7C080E301c06043992328683B
+Our currency deployed to:  0xc4ab29F7F39E93199C69F63d2B41B518e08D290a
+Currencies util contract deployed to: 0x00c65DE1cF0f356E04c736fAa97418e4360b5B0E
+MetaMarketplace deployed to: 0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C
+

@@ -30,7 +30,7 @@ var (
 
 // MetaMarketplaceMetaData contains all meta data concerning the MetaMarketplace contract.
 var MetaMarketplaceMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"currency_contract_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"telegram_collection_\",\"type\":\"address\"},{\"internalType\":\"addresspayable\",\"name\":\"treasure_fund_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"buyer\",\"type\":\"address\"}],\"name\":\"BuyOfferWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"initial_value\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fees\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"transfered_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"feeAddress\",\"type\":\"address\"}],\"name\":\"CalculatedFees\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"buyer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"NewBuyOffer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"NewSellOffer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recepient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"RoyaltiesPaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"buyer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Sale\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"}],\"name\":\"SellOfferWithdrawn\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"Marketplaces\",\"outputs\":[{\"internalType\":\"enumMetaMarketplace.NftType\",\"name\":\"nft_standard\",\"type\":\"uint8\"},{\"internalType\":\"bool\",\"name\":\"initialized\",\"type\":\"bool\"},{\"internalType\":\"addresspayable\",\"name\":\"collectionOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"ownerFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"promille_fee_\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"treasure_fund_\",\"type\":\"address\"}],\"name\":\"SetServiceFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"enumMetaMarketplace.NftType\",\"name\":\"standard_\",\"type\":\"uint8\"},{\"internalType\":\"addresspayable\",\"name\":\"collection_owner_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"collection_fee_\",\"type\":\"uint256\"}],\"name\":\"SetUpMarketplace\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_treasure_fund\",\"outputs\":[{\"internalType\":\"addresspayable\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"}],\"name\":\"acceptBuyOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"scale\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"promille_fee_\",\"type\":\"uint256\"}],\"name\":\"calculateAbstractFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"addresspayable\",\"name\":\"collection_owner_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"collection_fee_\",\"type\":\"uint256\"}],\"name\":\"editMarketplace\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"getLastPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"_lastPrice\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"bid_price_\",\"type\":\"uint256\"}],\"name\":\"makeBuyOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minPrice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"}],\"name\":\"makeSellOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"promille_fee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"bid_price_\",\"type\":\"uint256\"}],\"name\":\"purchase\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"}],\"name\":\"withdrawBuyOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"withdrawSellOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"currency_contract_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"telegram_collection_\",\"type\":\"address\"},{\"internalType\":\"addresspayable\",\"name\":\"treasure_fund_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"buyer\",\"type\":\"address\"}],\"name\":\"BuyOfferWithdrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"initial_value\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fees\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"transfered_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"feeAddress\",\"type\":\"address\"}],\"name\":\"CalculatedFees\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"buyer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"NewBuyOffer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"}],\"name\":\"NewMarketplace\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"category\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"NewSellCategory\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"NewSellOffer\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"recepient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"RoyaltiesPaid\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"buyer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Sale\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"seller\",\"type\":\"address\"}],\"name\":\"SellOfferWithdrawn\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"Marketplaces\",\"outputs\":[{\"internalType\":\"enumMetaMarketplace.NftType\",\"name\":\"nft_standard\",\"type\":\"uint8\"},{\"internalType\":\"bool\",\"name\":\"initialized\",\"type\":\"bool\"},{\"internalType\":\"addresspayable\",\"name\":\"collectionOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"ownerFee\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"promille_fee_\",\"type\":\"uint256\"},{\"internalType\":\"addresspayable\",\"name\":\"treasure_fund_\",\"type\":\"address\"}],\"name\":\"SetServiceFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"enumMetaMarketplace.NftType\",\"name\":\"standard_\",\"type\":\"uint8\"},{\"internalType\":\"addresspayable\",\"name\":\"collection_owner_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"collection_fee_\",\"type\":\"uint256\"}],\"name\":\"SetUpMarketplace\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_treasure_fund\",\"outputs\":[{\"internalType\":\"addresspayable\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"}],\"name\":\"acceptBuyOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"scale\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"promille_fee_\",\"type\":\"uint256\"}],\"name\":\"calculateAbstractFee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"addresspayable\",\"name\":\"collection_owner_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"collection_fee_\",\"type\":\"uint256\"}],\"name\":\"editMarketplace\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"}],\"name\":\"getLastPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"_lastPrice\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"bid_price_\",\"type\":\"uint256\"}],\"name\":\"makeBuyOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minPrice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"category_\",\"type\":\"string\"}],\"name\":\"makeSellOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"promille_fee\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"bid_price_\",\"type\":\"uint256\"}],\"name\":\"purchase\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"token_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"enumCurrenciesERC20.CurrencyERC20\",\"name\":\"currency_\",\"type\":\"uint8\"}],\"name\":\"withdrawBuyOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nft_contract_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"withdrawSellOffer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
 }
 
 // MetaMarketplaceABI is the input ABI used to generate the binding from.
@@ -539,25 +539,25 @@ func (_MetaMarketplace *MetaMarketplaceTransactorSession) MakeBuyOffer(token_con
 	return _MetaMarketplace.Contract.MakeBuyOffer(&_MetaMarketplace.TransactOpts, token_contract_, tokenId, currency_, bid_price_)
 }
 
-// MakeSellOffer is a paid mutator transaction binding the contract method 0x4ea5147e.
+// MakeSellOffer is a paid mutator transaction binding the contract method 0x4ee298dd.
 //
-// Solidity: function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, uint8 currency_) returns()
-func (_MetaMarketplace *MetaMarketplaceTransactor) MakeSellOffer(opts *bind.TransactOpts, tokenId *big.Int, minPrice *big.Int, nft_contract_ common.Address, currency_ uint8) (*types.Transaction, error) {
-	return _MetaMarketplace.contract.Transact(opts, "makeSellOffer", tokenId, minPrice, nft_contract_, currency_)
+// Solidity: function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, uint8 currency_, string category_) returns()
+func (_MetaMarketplace *MetaMarketplaceTransactor) MakeSellOffer(opts *bind.TransactOpts, tokenId *big.Int, minPrice *big.Int, nft_contract_ common.Address, currency_ uint8, category_ string) (*types.Transaction, error) {
+	return _MetaMarketplace.contract.Transact(opts, "makeSellOffer", tokenId, minPrice, nft_contract_, currency_, category_)
 }
 
-// MakeSellOffer is a paid mutator transaction binding the contract method 0x4ea5147e.
+// MakeSellOffer is a paid mutator transaction binding the contract method 0x4ee298dd.
 //
-// Solidity: function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, uint8 currency_) returns()
-func (_MetaMarketplace *MetaMarketplaceSession) MakeSellOffer(tokenId *big.Int, minPrice *big.Int, nft_contract_ common.Address, currency_ uint8) (*types.Transaction, error) {
-	return _MetaMarketplace.Contract.MakeSellOffer(&_MetaMarketplace.TransactOpts, tokenId, minPrice, nft_contract_, currency_)
+// Solidity: function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, uint8 currency_, string category_) returns()
+func (_MetaMarketplace *MetaMarketplaceSession) MakeSellOffer(tokenId *big.Int, minPrice *big.Int, nft_contract_ common.Address, currency_ uint8, category_ string) (*types.Transaction, error) {
+	return _MetaMarketplace.Contract.MakeSellOffer(&_MetaMarketplace.TransactOpts, tokenId, minPrice, nft_contract_, currency_, category_)
 }
 
-// MakeSellOffer is a paid mutator transaction binding the contract method 0x4ea5147e.
+// MakeSellOffer is a paid mutator transaction binding the contract method 0x4ee298dd.
 //
-// Solidity: function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, uint8 currency_) returns()
-func (_MetaMarketplace *MetaMarketplaceTransactorSession) MakeSellOffer(tokenId *big.Int, minPrice *big.Int, nft_contract_ common.Address, currency_ uint8) (*types.Transaction, error) {
-	return _MetaMarketplace.Contract.MakeSellOffer(&_MetaMarketplace.TransactOpts, tokenId, minPrice, nft_contract_, currency_)
+// Solidity: function makeSellOffer(uint256 tokenId, uint256 minPrice, address nft_contract_, uint8 currency_, string category_) returns()
+func (_MetaMarketplace *MetaMarketplaceTransactorSession) MakeSellOffer(tokenId *big.Int, minPrice *big.Int, nft_contract_ common.Address, currency_ uint8, category_ string) (*types.Transaction, error) {
+	return _MetaMarketplace.Contract.MakeSellOffer(&_MetaMarketplace.TransactOpts, tokenId, minPrice, nft_contract_, currency_, category_)
 }
 
 // Purchase is a paid mutator transaction binding the contract method 0xfa7a5405.
@@ -734,29 +734,48 @@ func (it *MetaMarketplaceBuyOfferWithdrawnIterator) Close() error {
 
 // MetaMarketplaceBuyOfferWithdrawn represents a BuyOfferWithdrawn event raised by the MetaMarketplace contract.
 type MetaMarketplaceBuyOfferWithdrawn struct {
-	TokenId *big.Int
-	Buyer   common.Address
-	Raw     types.Log // Blockchain specific contextual infos
+	NftContract common.Address
+	TokenId     *big.Int
+	Buyer       common.Address
+	Raw         types.Log // Blockchain specific contextual infos
 }
 
-// FilterBuyOfferWithdrawn is a free log retrieval operation binding the contract event 0xcde8efb885f61e3023afcfb4e801eca4790b08b4d7706ea9e7fb62073a09574a.
+// FilterBuyOfferWithdrawn is a free log retrieval operation binding the contract event 0xe3805436fa14d9349d05b8c9a073e53c4502637d37ec34b3f050d3946faea1da.
 //
-// Solidity: event BuyOfferWithdrawn(uint256 tokenId, address buyer)
-func (_MetaMarketplace *MetaMarketplaceFilterer) FilterBuyOfferWithdrawn(opts *bind.FilterOpts) (*MetaMarketplaceBuyOfferWithdrawnIterator, error) {
+// Solidity: event BuyOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address buyer)
+func (_MetaMarketplace *MetaMarketplaceFilterer) FilterBuyOfferWithdrawn(opts *bind.FilterOpts, nft_contract_ []common.Address, tokenId []*big.Int) (*MetaMarketplaceBuyOfferWithdrawnIterator, error) {
 
-	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "BuyOfferWithdrawn")
+	var nft_contract_Rule []interface{}
+	for _, nft_contract_Item := range nft_contract_ {
+		nft_contract_Rule = append(nft_contract_Rule, nft_contract_Item)
+	}
+	var tokenIdRule []interface{}
+	for _, tokenIdItem := range tokenId {
+		tokenIdRule = append(tokenIdRule, tokenIdItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "BuyOfferWithdrawn", nft_contract_Rule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
 	return &MetaMarketplaceBuyOfferWithdrawnIterator{contract: _MetaMarketplace.contract, event: "BuyOfferWithdrawn", logs: logs, sub: sub}, nil
 }
 
-// WatchBuyOfferWithdrawn is a free log subscription operation binding the contract event 0xcde8efb885f61e3023afcfb4e801eca4790b08b4d7706ea9e7fb62073a09574a.
+// WatchBuyOfferWithdrawn is a free log subscription operation binding the contract event 0xe3805436fa14d9349d05b8c9a073e53c4502637d37ec34b3f050d3946faea1da.
 //
-// Solidity: event BuyOfferWithdrawn(uint256 tokenId, address buyer)
-func (_MetaMarketplace *MetaMarketplaceFilterer) WatchBuyOfferWithdrawn(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceBuyOfferWithdrawn) (event.Subscription, error) {
+// Solidity: event BuyOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address buyer)
+func (_MetaMarketplace *MetaMarketplaceFilterer) WatchBuyOfferWithdrawn(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceBuyOfferWithdrawn, nft_contract_ []common.Address, tokenId []*big.Int) (event.Subscription, error) {
 
-	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "BuyOfferWithdrawn")
+	var nft_contract_Rule []interface{}
+	for _, nft_contract_Item := range nft_contract_ {
+		nft_contract_Rule = append(nft_contract_Rule, nft_contract_Item)
+	}
+	var tokenIdRule []interface{}
+	for _, tokenIdItem := range tokenId {
+		tokenIdRule = append(tokenIdRule, tokenIdItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "BuyOfferWithdrawn", nft_contract_Rule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
@@ -788,9 +807,9 @@ func (_MetaMarketplace *MetaMarketplaceFilterer) WatchBuyOfferWithdrawn(opts *bi
 	}), nil
 }
 
-// ParseBuyOfferWithdrawn is a log parse operation binding the contract event 0xcde8efb885f61e3023afcfb4e801eca4790b08b4d7706ea9e7fb62073a09574a.
+// ParseBuyOfferWithdrawn is a log parse operation binding the contract event 0xe3805436fa14d9349d05b8c9a073e53c4502637d37ec34b3f050d3946faea1da.
 //
-// Solidity: event BuyOfferWithdrawn(uint256 tokenId, address buyer)
+// Solidity: event BuyOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address buyer)
 func (_MetaMarketplace *MetaMarketplaceFilterer) ParseBuyOfferWithdrawn(log types.Log) (*MetaMarketplaceBuyOfferWithdrawn, error) {
 	event := new(MetaMarketplaceBuyOfferWithdrawn)
 	if err := _MetaMarketplace.contract.UnpackLog(event, "BuyOfferWithdrawn", log); err != nil {
@@ -1006,15 +1025,16 @@ func (it *MetaMarketplaceNewBuyOfferIterator) Close() error {
 
 // MetaMarketplaceNewBuyOffer represents a NewBuyOffer event raised by the MetaMarketplace contract.
 type MetaMarketplaceNewBuyOffer struct {
-	TokenId *big.Int
-	Buyer   common.Address
-	Value   *big.Int
-	Raw     types.Log // Blockchain specific contextual infos
+	NftContract common.Address
+	TokenId     *big.Int
+	Buyer       common.Address
+	Value       *big.Int
+	Raw         types.Log // Blockchain specific contextual infos
 }
 
-// FilterNewBuyOffer is a free log retrieval operation binding the contract event 0xd1d0f457f709cbed0f3360dee6050dde1a0ac4706268ff21aecae87e6ddb2861.
+// FilterNewBuyOffer is a free log retrieval operation binding the contract event 0x61e99c5925f0917c808d292f464c28394c472db57c537b76eb60db90a49420ed.
 //
-// Solidity: event NewBuyOffer(uint256 tokenId, address buyer, uint256 value)
+// Solidity: event NewBuyOffer(address nft_contract_, uint256 tokenId, address buyer, uint256 value)
 func (_MetaMarketplace *MetaMarketplaceFilterer) FilterNewBuyOffer(opts *bind.FilterOpts) (*MetaMarketplaceNewBuyOfferIterator, error) {
 
 	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "NewBuyOffer")
@@ -1024,9 +1044,9 @@ func (_MetaMarketplace *MetaMarketplaceFilterer) FilterNewBuyOffer(opts *bind.Fi
 	return &MetaMarketplaceNewBuyOfferIterator{contract: _MetaMarketplace.contract, event: "NewBuyOffer", logs: logs, sub: sub}, nil
 }
 
-// WatchNewBuyOffer is a free log subscription operation binding the contract event 0xd1d0f457f709cbed0f3360dee6050dde1a0ac4706268ff21aecae87e6ddb2861.
+// WatchNewBuyOffer is a free log subscription operation binding the contract event 0x61e99c5925f0917c808d292f464c28394c472db57c537b76eb60db90a49420ed.
 //
-// Solidity: event NewBuyOffer(uint256 tokenId, address buyer, uint256 value)
+// Solidity: event NewBuyOffer(address nft_contract_, uint256 tokenId, address buyer, uint256 value)
 func (_MetaMarketplace *MetaMarketplaceFilterer) WatchNewBuyOffer(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceNewBuyOffer) (event.Subscription, error) {
 
 	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "NewBuyOffer")
@@ -1061,12 +1081,292 @@ func (_MetaMarketplace *MetaMarketplaceFilterer) WatchNewBuyOffer(opts *bind.Wat
 	}), nil
 }
 
-// ParseNewBuyOffer is a log parse operation binding the contract event 0xd1d0f457f709cbed0f3360dee6050dde1a0ac4706268ff21aecae87e6ddb2861.
+// ParseNewBuyOffer is a log parse operation binding the contract event 0x61e99c5925f0917c808d292f464c28394c472db57c537b76eb60db90a49420ed.
 //
-// Solidity: event NewBuyOffer(uint256 tokenId, address buyer, uint256 value)
+// Solidity: event NewBuyOffer(address nft_contract_, uint256 tokenId, address buyer, uint256 value)
 func (_MetaMarketplace *MetaMarketplaceFilterer) ParseNewBuyOffer(log types.Log) (*MetaMarketplaceNewBuyOffer, error) {
 	event := new(MetaMarketplaceNewBuyOffer)
 	if err := _MetaMarketplace.contract.UnpackLog(event, "NewBuyOffer", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// MetaMarketplaceNewMarketplaceIterator is returned from FilterNewMarketplace and is used to iterate over the raw logs and unpacked data for NewMarketplace events raised by the MetaMarketplace contract.
+type MetaMarketplaceNewMarketplaceIterator struct {
+	Event *MetaMarketplaceNewMarketplace // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *MetaMarketplaceNewMarketplaceIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(MetaMarketplaceNewMarketplace)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(MetaMarketplaceNewMarketplace)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *MetaMarketplaceNewMarketplaceIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *MetaMarketplaceNewMarketplaceIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// MetaMarketplaceNewMarketplace represents a NewMarketplace event raised by the MetaMarketplace contract.
+type MetaMarketplaceNewMarketplace struct {
+	NftContract common.Address
+	Raw         types.Log // Blockchain specific contextual infos
+}
+
+// FilterNewMarketplace is a free log retrieval operation binding the contract event 0x11f8cd014e58379583c686140218c2c5d4a9cf8f7c57e152fdfaed66d627c6ed.
+//
+// Solidity: event NewMarketplace(address nft_contract_)
+func (_MetaMarketplace *MetaMarketplaceFilterer) FilterNewMarketplace(opts *bind.FilterOpts) (*MetaMarketplaceNewMarketplaceIterator, error) {
+
+	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "NewMarketplace")
+	if err != nil {
+		return nil, err
+	}
+	return &MetaMarketplaceNewMarketplaceIterator{contract: _MetaMarketplace.contract, event: "NewMarketplace", logs: logs, sub: sub}, nil
+}
+
+// WatchNewMarketplace is a free log subscription operation binding the contract event 0x11f8cd014e58379583c686140218c2c5d4a9cf8f7c57e152fdfaed66d627c6ed.
+//
+// Solidity: event NewMarketplace(address nft_contract_)
+func (_MetaMarketplace *MetaMarketplaceFilterer) WatchNewMarketplace(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceNewMarketplace) (event.Subscription, error) {
+
+	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "NewMarketplace")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(MetaMarketplaceNewMarketplace)
+				if err := _MetaMarketplace.contract.UnpackLog(event, "NewMarketplace", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseNewMarketplace is a log parse operation binding the contract event 0x11f8cd014e58379583c686140218c2c5d4a9cf8f7c57e152fdfaed66d627c6ed.
+//
+// Solidity: event NewMarketplace(address nft_contract_)
+func (_MetaMarketplace *MetaMarketplaceFilterer) ParseNewMarketplace(log types.Log) (*MetaMarketplaceNewMarketplace, error) {
+	event := new(MetaMarketplaceNewMarketplace)
+	if err := _MetaMarketplace.contract.UnpackLog(event, "NewMarketplace", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// MetaMarketplaceNewSellCategoryIterator is returned from FilterNewSellCategory and is used to iterate over the raw logs and unpacked data for NewSellCategory events raised by the MetaMarketplace contract.
+type MetaMarketplaceNewSellCategoryIterator struct {
+	Event *MetaMarketplaceNewSellCategory // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *MetaMarketplaceNewSellCategoryIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(MetaMarketplaceNewSellCategory)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(MetaMarketplaceNewSellCategory)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *MetaMarketplaceNewSellCategoryIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *MetaMarketplaceNewSellCategoryIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// MetaMarketplaceNewSellCategory represents a NewSellCategory event raised by the MetaMarketplace contract.
+type MetaMarketplaceNewSellCategory struct {
+	Category    common.Hash
+	NftContract common.Address
+	TokenId     *big.Int
+	Raw         types.Log // Blockchain specific contextual infos
+}
+
+// FilterNewSellCategory is a free log retrieval operation binding the contract event 0xa7fa1aea4d0dfc215e51c776b14941c757ea04d91fcbf8a96f84ef37ccd6085a.
+//
+// Solidity: event NewSellCategory(string indexed category, address nft_contract_, uint256 tokenId)
+func (_MetaMarketplace *MetaMarketplaceFilterer) FilterNewSellCategory(opts *bind.FilterOpts, category []string) (*MetaMarketplaceNewSellCategoryIterator, error) {
+
+	var categoryRule []interface{}
+	for _, categoryItem := range category {
+		categoryRule = append(categoryRule, categoryItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "NewSellCategory", categoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return &MetaMarketplaceNewSellCategoryIterator{contract: _MetaMarketplace.contract, event: "NewSellCategory", logs: logs, sub: sub}, nil
+}
+
+// WatchNewSellCategory is a free log subscription operation binding the contract event 0xa7fa1aea4d0dfc215e51c776b14941c757ea04d91fcbf8a96f84ef37ccd6085a.
+//
+// Solidity: event NewSellCategory(string indexed category, address nft_contract_, uint256 tokenId)
+func (_MetaMarketplace *MetaMarketplaceFilterer) WatchNewSellCategory(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceNewSellCategory, category []string) (event.Subscription, error) {
+
+	var categoryRule []interface{}
+	for _, categoryItem := range category {
+		categoryRule = append(categoryRule, categoryItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "NewSellCategory", categoryRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(MetaMarketplaceNewSellCategory)
+				if err := _MetaMarketplace.contract.UnpackLog(event, "NewSellCategory", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseNewSellCategory is a log parse operation binding the contract event 0xa7fa1aea4d0dfc215e51c776b14941c757ea04d91fcbf8a96f84ef37ccd6085a.
+//
+// Solidity: event NewSellCategory(string indexed category, address nft_contract_, uint256 tokenId)
+func (_MetaMarketplace *MetaMarketplaceFilterer) ParseNewSellCategory(log types.Log) (*MetaMarketplaceNewSellCategory, error) {
+	event := new(MetaMarketplaceNewSellCategory)
+	if err := _MetaMarketplace.contract.UnpackLog(event, "NewSellCategory", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -1579,10 +1879,19 @@ type MetaMarketplaceSale struct {
 
 // FilterSale is a free log retrieval operation binding the contract event 0x3644379fe03acf3b2db463b2b1fb79bfa0a162795d0e7bb0c8a999bd98db8135.
 //
-// Solidity: event Sale(address nft_contract_, uint256 tokenId, address seller, address buyer, uint256 value)
-func (_MetaMarketplace *MetaMarketplaceFilterer) FilterSale(opts *bind.FilterOpts) (*MetaMarketplaceSaleIterator, error) {
+// Solidity: event Sale(address indexed nft_contract_, uint256 indexed tokenId, address seller, address buyer, uint256 value)
+func (_MetaMarketplace *MetaMarketplaceFilterer) FilterSale(opts *bind.FilterOpts, nft_contract_ []common.Address, tokenId []*big.Int) (*MetaMarketplaceSaleIterator, error) {
 
-	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "Sale")
+	var nft_contract_Rule []interface{}
+	for _, nft_contract_Item := range nft_contract_ {
+		nft_contract_Rule = append(nft_contract_Rule, nft_contract_Item)
+	}
+	var tokenIdRule []interface{}
+	for _, tokenIdItem := range tokenId {
+		tokenIdRule = append(tokenIdRule, tokenIdItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "Sale", nft_contract_Rule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1591,10 +1900,19 @@ func (_MetaMarketplace *MetaMarketplaceFilterer) FilterSale(opts *bind.FilterOpt
 
 // WatchSale is a free log subscription operation binding the contract event 0x3644379fe03acf3b2db463b2b1fb79bfa0a162795d0e7bb0c8a999bd98db8135.
 //
-// Solidity: event Sale(address nft_contract_, uint256 tokenId, address seller, address buyer, uint256 value)
-func (_MetaMarketplace *MetaMarketplaceFilterer) WatchSale(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceSale) (event.Subscription, error) {
+// Solidity: event Sale(address indexed nft_contract_, uint256 indexed tokenId, address seller, address buyer, uint256 value)
+func (_MetaMarketplace *MetaMarketplaceFilterer) WatchSale(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceSale, nft_contract_ []common.Address, tokenId []*big.Int) (event.Subscription, error) {
 
-	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "Sale")
+	var nft_contract_Rule []interface{}
+	for _, nft_contract_Item := range nft_contract_ {
+		nft_contract_Rule = append(nft_contract_Rule, nft_contract_Item)
+	}
+	var tokenIdRule []interface{}
+	for _, tokenIdItem := range tokenId {
+		tokenIdRule = append(tokenIdRule, tokenIdItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "Sale", nft_contract_Rule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1628,7 +1946,7 @@ func (_MetaMarketplace *MetaMarketplaceFilterer) WatchSale(opts *bind.WatchOpts,
 
 // ParseSale is a log parse operation binding the contract event 0x3644379fe03acf3b2db463b2b1fb79bfa0a162795d0e7bb0c8a999bd98db8135.
 //
-// Solidity: event Sale(address nft_contract_, uint256 tokenId, address seller, address buyer, uint256 value)
+// Solidity: event Sale(address indexed nft_contract_, uint256 indexed tokenId, address seller, address buyer, uint256 value)
 func (_MetaMarketplace *MetaMarketplaceFilterer) ParseSale(log types.Log) (*MetaMarketplaceSale, error) {
 	event := new(MetaMarketplaceSale)
 	if err := _MetaMarketplace.contract.UnpackLog(event, "Sale", log); err != nil {
@@ -1715,10 +2033,19 @@ type MetaMarketplaceSellOfferWithdrawn struct {
 
 // FilterSellOfferWithdrawn is a free log retrieval operation binding the contract event 0xce00375f5a3b9c4a857fc9fa1b243f1af9b10a7db9d2d47227fe8217003c9ad4.
 //
-// Solidity: event SellOfferWithdrawn(address nft_contract_, uint256 tokenId, address seller)
-func (_MetaMarketplace *MetaMarketplaceFilterer) FilterSellOfferWithdrawn(opts *bind.FilterOpts) (*MetaMarketplaceSellOfferWithdrawnIterator, error) {
+// Solidity: event SellOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address seller)
+func (_MetaMarketplace *MetaMarketplaceFilterer) FilterSellOfferWithdrawn(opts *bind.FilterOpts, nft_contract_ []common.Address, tokenId []*big.Int) (*MetaMarketplaceSellOfferWithdrawnIterator, error) {
 
-	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "SellOfferWithdrawn")
+	var nft_contract_Rule []interface{}
+	for _, nft_contract_Item := range nft_contract_ {
+		nft_contract_Rule = append(nft_contract_Rule, nft_contract_Item)
+	}
+	var tokenIdRule []interface{}
+	for _, tokenIdItem := range tokenId {
+		tokenIdRule = append(tokenIdRule, tokenIdItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.FilterLogs(opts, "SellOfferWithdrawn", nft_contract_Rule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1727,10 +2054,19 @@ func (_MetaMarketplace *MetaMarketplaceFilterer) FilterSellOfferWithdrawn(opts *
 
 // WatchSellOfferWithdrawn is a free log subscription operation binding the contract event 0xce00375f5a3b9c4a857fc9fa1b243f1af9b10a7db9d2d47227fe8217003c9ad4.
 //
-// Solidity: event SellOfferWithdrawn(address nft_contract_, uint256 tokenId, address seller)
-func (_MetaMarketplace *MetaMarketplaceFilterer) WatchSellOfferWithdrawn(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceSellOfferWithdrawn) (event.Subscription, error) {
+// Solidity: event SellOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address seller)
+func (_MetaMarketplace *MetaMarketplaceFilterer) WatchSellOfferWithdrawn(opts *bind.WatchOpts, sink chan<- *MetaMarketplaceSellOfferWithdrawn, nft_contract_ []common.Address, tokenId []*big.Int) (event.Subscription, error) {
 
-	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "SellOfferWithdrawn")
+	var nft_contract_Rule []interface{}
+	for _, nft_contract_Item := range nft_contract_ {
+		nft_contract_Rule = append(nft_contract_Rule, nft_contract_Item)
+	}
+	var tokenIdRule []interface{}
+	for _, tokenIdItem := range tokenId {
+		tokenIdRule = append(tokenIdRule, tokenIdItem)
+	}
+
+	logs, sub, err := _MetaMarketplace.contract.WatchLogs(opts, "SellOfferWithdrawn", nft_contract_Rule, tokenIdRule)
 	if err != nil {
 		return nil, err
 	}
@@ -1764,7 +2100,7 @@ func (_MetaMarketplace *MetaMarketplaceFilterer) WatchSellOfferWithdrawn(opts *b
 
 // ParseSellOfferWithdrawn is a log parse operation binding the contract event 0xce00375f5a3b9c4a857fc9fa1b243f1af9b10a7db9d2d47227fe8217003c9ad4.
 //
-// Solidity: event SellOfferWithdrawn(address nft_contract_, uint256 tokenId, address seller)
+// Solidity: event SellOfferWithdrawn(address indexed nft_contract_, uint256 indexed tokenId, address seller)
 func (_MetaMarketplace *MetaMarketplaceFilterer) ParseSellOfferWithdrawn(log types.Log) (*MetaMarketplaceSellOfferWithdrawn, error) {
 	event := new(MetaMarketplaceSellOfferWithdrawn)
 	if err := _MetaMarketplace.contract.UnpackLog(event, "SellOfferWithdrawn", log); err != nil {
