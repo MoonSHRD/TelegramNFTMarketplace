@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react';
-import {Text, Image} from '@chakra-ui/react'
+import {Text, Image, Box} from '@chakra-ui/react'
 //import {ERC20ABI as abi} from 'abi/ERC20ABI'
 import {abi} from '../../../artifacts/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol/IERC721Metadata.json'
 
@@ -62,7 +62,9 @@ export default function ReadNFT_Telegram(props:Props){
     <div className="grid-element" >
         <Text><b>NFT address</b>: {addressContract}</Text>
         <Text><b>Token ID</b>: {token_id}</Text>
-        <Image src={uri} boxSize='-moz-fit-content'></Image>
+        <Box boxSize='sm'>
+        <Image src={uri} ></Image>
+        </Box>
     </div>
 
   )
