@@ -105,15 +105,15 @@ const Home: NextPage = () => {
           <Heading my={4}  fontSize='xl'>Approve your NFT to be interactable at marketplace:</Heading>
           <ApproveSingleton 
             addressContract='0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e'
-            marketAddress='0x87da345d041359d7C080E301c06043992328683B'
+            marketAddress='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
             currentAccount={currentAccount}
           />
         </Box> 
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Put your NFT on sale</Heading>
           <MakeSellOffer 
-            addressContract='0x87da345d041359d7C080E301c06043992328683B'
-            marketAddress='0x87da345d041359d7C080E301c06043992328683B'
+            addressContract='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
+            marketAddress='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
             collectionContract='0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e'
             currentAccount={currentAccount}
           />
