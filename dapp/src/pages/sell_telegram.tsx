@@ -97,14 +97,14 @@ const Home: NextPage = () => {
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Your NFT:</Heading>
           <ReadNFT_Telegram 
-            addressContract='0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e'
+            addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             currentAccount={currentAccount}
           />
         </Box> 
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Approve your NFT to be interactable at marketplace:</Heading>
           <ApproveSingleton 
-            addressContract='0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e'
+            addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             marketAddress='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
             currentAccount={currentAccount}
           />
@@ -112,9 +112,9 @@ const Home: NextPage = () => {
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Put your NFT on sale</Heading>
           <MakeSellOffer 
-            addressContract='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
-            marketAddress='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
-            collectionContract='0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e'
+            addressContract='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
+            marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
+            collectionContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             currentAccount={currentAccount}
           />
         </Box> 

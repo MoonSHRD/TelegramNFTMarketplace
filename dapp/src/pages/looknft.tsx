@@ -94,7 +94,7 @@ const Home: NextPage = () => {
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Add Item to Singelton collection</Heading>
           <ReadNFT_Telegram 
-            addressContract='0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e'
+            addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             currentAccount={currentAccount}
           />
         </Box> 
