@@ -18,13 +18,16 @@ async function main() {
   console.log(hre.network.name);
 
   let initialSupply = toWei(1000000);
-  //const erc20sample = await ERC20Sample.deploy("Token", "TKN", initialSupply);
+ 
+
+  // Polygon addresses
+  const USDT = "0xc2132D05D31c914a87C6611C10748AEb04B58e8F";
+  const USDC = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
+  const DAI = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
+  const WBTC = "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6";
+  const WETH = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
 
 
-
-  //let murs_account = ethers.utils.getAddress("0x383A9e83E36796106EaC11E8c2Fbe8b92Ff46D3a");
-  //let account_owner = await hre.ethers.getSigner();
-  //const owner = await hre.ethers.utils.getAddress("0x16d97A46030C5D3D705bca45439e48529997D8b2");
   const accounts = await hre.ethers.getSigners();
   for (const account of accounts) {
     console.log(account.address);
@@ -45,14 +48,14 @@ async function main() {
 
   // We get the contract to deploy
   const CurrenciesERC20_F = await hre.ethers.getContractFactory("CurrenciesERC20");
-  const Currencies = await CurrenciesERC20_F.deploy("0xe583769738b6dd4E7CAF8451050d1948BE717679","0x07865c6E87B9F70255377e024ace6630C1Eaa37F","0x73967c6a0904aA032C103b4104747E88c566B1A2","0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6","0xC04B0d3107736C32e19F1c62b2aF67BE61d63a05",our_currency.address);
+  const Currencies = await CurrenciesERC20_F.deploy(USDT,USDC,DAI,WETH,WBTC,our_currency.address);
 
   await Currencies.deployed();
   console.log("Currencies util contract deployed to:", Currencies.address);
 
 
   const MetaMarketplace_F = await hre.ethers.getContractFactory("MetaMarketplace");
-  const MetaMarketplace = await MetaMarketplace_F.deploy(Currencies.address,"0x36Ed9bc9473F1316ec15BCca45f49f4481A63c5e",owner_account.address);
+  const MetaMarketplace = await MetaMarketplace_F.deploy(Currencies.address,"0xEbE648689E98abA446e38621E5a3491db03a7621",owner_account.address);
   await MetaMarketplace.deployed();
   console.log("MetaMarketplace deployed to:", MetaMarketplace.address);
 
