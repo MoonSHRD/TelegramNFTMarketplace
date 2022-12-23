@@ -6,11 +6,9 @@ import { Text, Button } from '@chakra-ui/react'
 import { useState, useEffect} from 'react'
 import {ethers} from "ethers"
 import ReadNFT_Telegram from "../components/readNFT_Telegram"
-import ApproveSingleton from "../components/approveSingletonNft"
-import MakeSellOffer from "../components/makeSellOffer"
+import Purchase from "../components/purchase"
+import MakeBuyOffer from "../components/makeBuyOffer"
 
-
-//buy_telegram?token_id=1&currency=0&price=1&collection_contract_address=0xEbE648689E98abA446e38621E5a3491db03a7621
 
 declare let window:any
 
@@ -19,6 +17,7 @@ const Home: NextPage = () => {
   const [currentAccount, setCurrentAccount] = useState<string | undefined>()
   const [chainId, setChainId] = useState<number | undefined>()
   const [chainname, setChainName] = useState<string | undefined>()
+  const [currency,setCurrency] = useState<string | undefined>()
 
   useEffect(() => {
     if(!currentAccount || !ethers.utils.isAddress(currentAccount)) return
@@ -32,6 +31,14 @@ const Home: NextPage = () => {
       setChainId(result.chainId)
       setChainName(result.name)
     })
+
+    const queryParams = new URLSearchParams(location.search);
+
+    var currency_q = queryParams.get('currency'); // 
+    console.log("currency_q: ", currency_q);
+
+    setCurrency(currency_q);
+    console.log("currency: ", currency_q);
 
   },[currentAccount])
 
@@ -74,7 +81,7 @@ const Home: NextPage = () => {
         <title>NFT Marketplace</title>
       </Head>
 
-      <Heading as="h3"  my={4}>Sell your NFT</Heading>          
+      <Heading as="h3"  my={4}>Buy an NFT</Heading>          
       <VStack>
         <Box w='100%' my={4}>
         {currentAccount  
@@ -104,22 +111,22 @@ const Home: NextPage = () => {
           />
         </Box> 
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Approve your NFT to be interactable at marketplace:</Heading>
-          <ApproveSingleton 
+          <Heading my={4}  fontSize='xl'>Buy now!</Heading>
+          <Purchase 
             addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             marketAddress='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
             currentAccount={currentAccount}
           />
         </Box> 
-        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Put your NFT on sale</Heading>
+       {/*  <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
+          <Heading my={4}  fontSize='xl'>Make buy offer</Heading>
           <MakeSellOffer 
             addressContract='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
             marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
             collectionContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             currentAccount={currentAccount}
           />
-        </Box> 
+        </Box>  */}
   
 
 ...
