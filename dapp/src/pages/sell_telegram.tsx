@@ -10,6 +10,8 @@ import ApproveSingleton from "../components/approveSingletonNft"
 import MakeSellOffer from "../components/makeSellOffer"
 
 
+//buy_telegram?token_id=1&currency=0&price=1&collection_contract_address=0xEbE648689E98abA446e38621E5a3491db03a7621
+
 declare let window:any
 
 const Home: NextPage = () => {
