@@ -23,6 +23,7 @@ export default function MakeBuyOffer(props:Props){
   //var [user_id, setUserId] = useState(0)
   //var [user_name, setUserName] = useState<string>("")
   var [currency, setCurrency] = useState<string>("") // TODO: fix it to work as input option
+  var [desCurrency, setDesCurrency] = useState<string>("")
   var [price,setPrice] = useState<string>("")
   var [human_number,setHuman_number] = useState<string>("")
   var [token_id,setTokenId] = useState(0)
@@ -51,7 +52,13 @@ export default function MakeBuyOffer(props:Props){
   var c = queryParams.get('currency');
   setCurrency(c);
   
-  
+
+  const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)
+  var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id_n)
+  console.log("Desired price:", desiredPrice)
+
+  setDesCurrency(desiredCurrency)
+
   
   }, []);
   
@@ -92,7 +99,7 @@ export default function MakeBuyOffer(props:Props){
         <Text><b>Marketplace address</b>:{addressContract}</Text>
 
     </div>
-      <Button type="submit" isDisabled={!currentAccount}>Buy</Button>
+      <Button type="submit" isDisabled={!currentAccount || currency != desCurrency}>Buy</Button>
     </FormControl>
     </form>
   )
