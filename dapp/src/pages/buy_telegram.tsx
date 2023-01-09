@@ -112,15 +112,15 @@ const Home: NextPage = () => {
             currentAccount={currentAccount}
           />
         </Box> 
-        {/* <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
+        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Buy now!</Heading>
           <Purchase 
             addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             marketAddress='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
             currentAccount={currentAccount}
           />
-        </Box>  */}
-        <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
+        </Box> 
+        {/* <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Make buy offer</Heading>
           <MakeSellOffer 
             addressContract='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
@@ -128,7 +128,7 @@ const Home: NextPage = () => {
             collectionContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             currentAccount={currentAccount}
           />
-        </Box> 
+        </Box>  */}
   
 
 ...
