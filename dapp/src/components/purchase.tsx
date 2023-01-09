@@ -15,7 +15,7 @@ interface Props {
 
 declare let window: any;
 
-
+///buy_telegram?token_id=4&price=1000&currency=5&collection_contract_address=0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C
 export default function Purchase(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
@@ -54,7 +54,7 @@ export default function Purchase(props:Props){
   var c = queryParams.get('currency');
   setCurrency(c);
   
-  const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)
+  const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)//todo
   var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id)
   console.log("Desired price:", desiredPrice)
 
