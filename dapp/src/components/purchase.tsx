@@ -99,8 +99,10 @@ export default function MakeBuyOffer(props:Props){
         <Text><b>Marketplace address</b>:{addressContract}</Text>
 
     </div>
-      <Button type="submit" isDisabled={!currentAccount || currency != desCurrency}>Buy</Button>
+      <Button type="submit" isDisabled={!currentAccount}>Buy</Button>
     </FormControl>
     </form>
   )
 }
+
+//|| currency != desCurrency
