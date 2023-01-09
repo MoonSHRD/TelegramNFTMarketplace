@@ -1,13 +1,13 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import NextLink from "next/link"
+//import NextLink from "next/link"
 import { VStack, Heading, Box, LinkOverlay, LinkBox} from "@chakra-ui/layout"
 import { Text, Button } from '@chakra-ui/react'
 import { useState, useEffect} from 'react'
 import {ethers} from "ethers"
 import ReadNFT_Telegram from "../components/readNFT_Telegram"
 import Purchase from "../components/purchase"
-import MakeBuyOffer from "../components/makeBuyOffer"
+//import MakeBuyOffer from "../components/makeBuyOffer"
 
 
 declare let window:any
