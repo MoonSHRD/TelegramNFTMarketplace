@@ -19,7 +19,7 @@ declare let window: any;
 export default function Purchase(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
-  //const marketAddress = props.marketAddress
+  const marketAddress = props.marketAddress
   //var [user_id, setUserId] = useState(0)
   //var [user_name, setUserName] = useState<string>("")
   var [currency, setCurrency] = useState<string>("") // TODO: fix it to work as input option
@@ -41,7 +41,9 @@ export default function Purchase(props:Props){
 
   
   var p = queryParams.get('price');
+  console.log(p);
   var a_ether = ethers.utils.formatEther(p);
+  console.log(a_ether);
   setHuman_number(a_ether);
   setPrice(p);
 
@@ -52,7 +54,11 @@ export default function Purchase(props:Props){
   var c = queryParams.get('currency');
   setCurrency(c);
   
+  const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)
+  var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id)
+  console.log("Desired price:", desiredPrice)
 
+  setDesCurrency(desiredCurrency)
  
 
   
@@ -68,11 +74,7 @@ export default function Purchase(props:Props){
     const MetaMarketplace:Contract = new ethers.Contract(addressContract, abi, signer)
     console.log("token id to interact raw: ", token_id)
 
-    const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)
-    var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id)
-    console.log("Desired price:", desiredPrice)
-  
-    setDesCurrency(desiredCurrency)
+    
     // var token_id_uint = ethers.utils.
     var currency_int = parseInt(currency)
     MetaMarketplace.purchase(collection_address,token_id,currency_int,price)
@@ -90,7 +92,7 @@ export default function Purchase(props:Props){
   return (
     <form onSubmit={purchase}>
     <FormControl>
-      <FormLabel >Sell your nft: </FormLabel>
+      <FormLabel >Purchase an nft: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
      
      <Input id="price" type="text" placeholder="bid price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
