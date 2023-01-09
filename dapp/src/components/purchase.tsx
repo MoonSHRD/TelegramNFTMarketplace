@@ -19,7 +19,7 @@ declare let window: any;
 export default function Purchase(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
-  const marketAddress = props.marketAddress
+  //const marketAddress = props.marketAddress
   //var [user_id, setUserId] = useState(0)
   //var [user_name, setUserName] = useState<string>("")
   var [currency, setCurrency] = useState<string>("") // TODO: fix it to work as input option
