@@ -16,7 +16,7 @@ interface Props {
 declare let window: any;
 
 
-export default function MakeBuyOffer(props:Props){
+export default function Purchase(props:Props){
   const addressContract = props.addressContract
   const currentAccount = props.currentAccount
   const marketAddress = props.marketAddress
@@ -99,10 +99,8 @@ export default function MakeBuyOffer(props:Props){
         <Text><b>Marketplace address</b>:{addressContract}</Text>
 
     </div>
-      <Button type="submit" isDisabled={!currentAccount}>Buy</Button>
+      <Button type="submit" isDisabled={!currentAccount || currency != desCurrency}>Buy</Button>
     </FormControl>
     </form>
   )
 }
-
-//|| currency != desCurrency
