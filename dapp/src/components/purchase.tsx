@@ -53,11 +53,7 @@ export default function Purchase(props:Props){
   setCurrency(c);
   
 
-  const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)
-  var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id_n)
-  console.log("Desired price:", desiredPrice)
-
-  setDesCurrency(desiredCurrency)
+ 
 
   
   }, []);
@@ -71,6 +67,12 @@ export default function Purchase(props:Props){
     const user_address = signer._address
     const MetaMarketplace:Contract = new ethers.Contract(addressContract, abi, signer)
     console.log("token id to interact raw: ", token_id)
+
+    const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)
+    var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id)
+    console.log("Desired price:", desiredPrice)
+  
+    setDesCurrency(desiredCurrency)
     // var token_id_uint = ethers.utils.
     var currency_int = parseInt(currency)
     MetaMarketplace.purchase(collection_address,token_id,currency_int,price)
