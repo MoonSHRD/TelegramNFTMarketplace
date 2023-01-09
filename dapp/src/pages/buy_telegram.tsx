@@ -7,7 +7,7 @@ import { useState, useEffect} from 'react'
 import {ethers} from "ethers"
 import ReadNFT_Telegram from "../components/readNFT_Telegram"
 import Purchase from "../components/purchase"
-import MakeBuyOffer from 'components/makeBuyOffer'
+import MakeBuyOffer from '../components/makeBuyOffer'
 import MakeSellOffer from "../components/makeSellOffer"
 //import MakeBuyOffer from "../components/makeBuyOffer"
 
