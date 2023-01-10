@@ -88,7 +88,6 @@ export default function ApproveERC20(props:Props){
       <option value='0xA25d4cb14742a408B7421A259c96cE29F6113B3d'>VXPPL</option>
       </Select>
      </div>
-        <Text><b>Marketplace address</b>:{marketAddress}</Text>
     </div>
       <Button type="submit" isDisabled={!currentAccount}>Approve</Button>
     </FormControl>
