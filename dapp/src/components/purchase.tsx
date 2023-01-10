@@ -70,9 +70,12 @@ export default function Purchase(props:Props){
   console.log("Desired currency: ", desCurrency);
 
   // TODO: add getter for active sell offer in contract?
+  /*
   var MarketplaceStruct = MetaMarketplaceRead.Marketplaces(collection_address);
   console.log("Try to get Marketplace struct: ", MarketplaceStruct);
-  
+  */
+
+
 
   if (desiredPrice != undefined && desiredCurrency != undefined) {
     setDesCurrency(desiredCurrency)
