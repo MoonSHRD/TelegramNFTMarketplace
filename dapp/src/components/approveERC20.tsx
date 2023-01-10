@@ -55,7 +55,7 @@ export default function ApproveERC20(props:Props){
     }
 
 
-    var amount_wei = ethers.utils.formatUnits(human_number, mindiv)  // let's suppose we got wei number in query and we just parse it
+    var amount_wei = ethers.utils.parseUnits(human_number.toString(), mindiv)  // let's suppose we got wei number in query and we just parse it
     console.log("amount to approve in wei: ", amount_wei)
    // let passport_fee_wei = ethers.utils.formatUnits(1000,"wei");
     //let passport_fee_custom_gwei = ethers.utils.formatUnits(2000000,"gwei"); // 1 gwei = 1'000'000'000 wei, 2m gwei = 0,002 (estimateGas on approval = 0.02, so we need to take that fee for gas)
