@@ -61,7 +61,7 @@ export default function ApproveERC20(props:Props){
     //let passport_fee_custom_gwei = ethers.utils.formatUnits(2000000,"gwei"); // 1 gwei = 1'000'000'000 wei, 2m gwei = 0,002 (estimateGas on approval = 0.02, so we need to take that fee for gas)
     //let passport_fee_wei = ethers.utils.formatUnits(passport_fee_custom_gwei,"wei");
     //let passport_fee_wei_hardcode = ethers.utils.formatUnits(2000000000000000,"wei");
-    ERC20_contract.approve(user_address,marketAddress,{value:amount_wei})
+    ERC20_contract.approve(user_address,marketAddress, amount_wei)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then((receipt:TransactionReceipt) => {console.log("approve receipt", receipt)})
