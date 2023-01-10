@@ -40,7 +40,7 @@ export default function ApproveERC20(props:Props){
     if(!window.ethereum) return    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
-    const user_address = signer._address
+    const user_address = currentAccount
     console.log(user_address)
     const ERC20_contract:Contract = new ethers.Contract(addressContract, abi, signer)
     
