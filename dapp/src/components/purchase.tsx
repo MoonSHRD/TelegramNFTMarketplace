@@ -61,7 +61,11 @@ export default function Purchase(props:Props){
   var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id)
   console.log("Desired price:", desiredPrice)
 
-  setDesCurrency(desiredCurrency)
+
+  if (desiredPrice != undefined && desiredCurrency != undefined) {
+    setDesCurrency(desiredCurrency)
+  }
+  
  
 
   
