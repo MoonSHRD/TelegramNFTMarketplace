@@ -39,15 +39,17 @@ export default function MakeBuyOffer(props:Props){
   setTokenId(token_id_n);
 
   
-  var p = queryParams.get('min_price');
+  var p = queryParams.get('price');
   var a_ether = ethers.utils.formatEther(p);
   setHuman_number(a_ether);
   
-
-  var ac_q = queryParams.get('collection_contract_address'); // erc20 to approve
+  if (addressContract != undefined || addressContract != "") {
+    setCollectionAddress(addressContract);
+  } else {
+  var ac_q = queryParams.get('collection_contract_address'); 
   var ac_a = ethers.utils.getAddress(ac_q);
   setCollectionAddress(ac_a);
-
+  }
   
   
   
@@ -61,7 +63,7 @@ export default function MakeBuyOffer(props:Props){
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
     const user_address = signer._address
-    const MetaMarketplace:Contract = new ethers.Contract(addressContract, abi, signer)
+    const MetaMarketplace:Contract = new ethers.Contract(marketAddress, abi, signer)
     console.log("token id to interact raw: ", token_id)
     // var token_id_uint = ethers.utils.
     var currency_int = parseInt(currency)

@@ -107,7 +107,7 @@ export default function Purchase(props:Props){
       <div>
         <Text><b>Token id to buy</b>:{token_id}</Text>
         <Text><b>Currency</b>:{currency}</Text>
-        <Text><b>Marketplace address</b>:{addressContract}</Text>
+        <Text><b>Marketplace address</b>:{marketAddress}</Text>
 
     </div>
       <Button type="submit" isDisabled={!currentAccount || currency != desCurrency}>Buy</Button>
