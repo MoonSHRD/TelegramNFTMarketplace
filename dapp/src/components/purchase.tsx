@@ -52,7 +52,13 @@ export default function Purchase(props:Props){
   var ac_a = ethers.utils.getAddress(ac_q);
   setCollectionAddress(ac_a);
   */
-  setCollectionAddress(addressContract)
+  if (addressContract != undefined || addressContract != "") {
+    setCollectionAddress(addressContract);
+  } else {
+    var ac_q = queryParams.get('collection_contract_address'); 
+    var ac_a = ethers.utils.getAddress(ac_q);
+    setCollectionAddress(ac_a);
+  }
 
   var c = queryParams.get('currency');
   setCurrency(c);
@@ -66,7 +72,7 @@ export default function Purchase(props:Props){
     setDesCurrency(desiredCurrency)
   }
   
- 
+
 
   
   }, []);
