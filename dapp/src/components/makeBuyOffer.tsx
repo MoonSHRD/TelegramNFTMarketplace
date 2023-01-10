@@ -82,7 +82,7 @@ export default function MakeBuyOffer(props:Props){
   return (
     <form onSubmit={makeBuyOffer}>
     <FormControl>
-      <FormLabel >Sell your nft: </FormLabel>
+      <FormLabel >Make buy offer to this NFT: </FormLabel>
       <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
      
      <Input id="price" type="text" placeholder="bid price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
