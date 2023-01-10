@@ -63,10 +63,16 @@ export default function Purchase(props:Props){
   var c = queryParams.get('currency');
   setCurrency(c);
   
-  const MetaMarketplaceRead:Contract = new ethers.Contract(marketAddress, abi)//todo
-  var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id)
-  console.log("Desired price:", desiredPrice)
+  const MetaMarketplaceRead:Contract = new ethers.Contract(marketAddress, abi)
 
+  var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id) // TODO: FIX IT, this function get only lastprice for already bought tokens
+  console.log("Desired price:", desiredPrice)
+  console.log("Desired currency: ", desCurrency);
+
+  // TODO: add getter for active sell offer in contract?
+  var MarketplaceStruct = MetaMarketplaceRead.getMarketplaces(collection_address);
+  console.log("Try to get Marketplace struct: ", MarketplaceStruct);
+  
 
   if (desiredPrice != undefined && desiredCurrency != undefined) {
     setDesCurrency(desiredCurrency)
