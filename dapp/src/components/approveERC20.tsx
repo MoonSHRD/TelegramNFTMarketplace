@@ -55,13 +55,20 @@ export default function ApproveERC20(props:Props){
     }
 
 
-    var amount_wei = ethers.utils.parseUnits(human_number.toString(), mindiv)  // let's suppose we got wei number in query and we just parse it
+
+    let amount_wei1 = ethers.utils.formatUnits(human_number.toString(), mindiv)  // let's suppose we got wei number in query and we just parse it
+    console.log("amount to approve in wei: ", amount_wei1)
+
+    let amountWei2 = parseInt(amount_wei1)
+    console.log("amount to approve in wei: ", amountWei2)
+
+    let amount_wei = ethers.utils.parseUnits(human_number.toString(), mindiv)  // let's suppose we got wei number in query and we just parse it
     console.log("amount to approve in wei: ", amount_wei)
    // let passport_fee_wei = ethers.utils.formatUnits(1000,"wei");
     //let passport_fee_custom_gwei = ethers.utils.formatUnits(2000000,"gwei"); // 1 gwei = 1'000'000'000 wei, 2m gwei = 0,002 (estimateGas on approval = 0.02, so we need to take that fee for gas)
     //let passport_fee_wei = ethers.utils.formatUnits(passport_fee_custom_gwei,"wei");
     //let passport_fee_wei_hardcode = ethers.utils.formatUnits(2000000000000000,"wei");
-    ERC20_contract.approve(user_address,marketAddress, amount_wei)
+    ERC20_contract.approve(user_address,marketAddress, amount_wei1)
      .then((tr: TransactionResponse) => {
         console.log(`TransactionResponse TX hash: ${tr.hash}`)
         tr.wait().then((receipt:TransactionReceipt) => {console.log("approve receipt", receipt)})
