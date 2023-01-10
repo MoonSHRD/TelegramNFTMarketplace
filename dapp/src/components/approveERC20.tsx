@@ -46,18 +46,18 @@ export default function ApproveERC20(props:Props){
     
     var mindiv
 
-/*     if (addressContract == '0xc2132D05D31c914a87C6611C10748AEb04B58e8F' || addressContract == '0x2791bca1f2de4661ed88a30c99a7a9449aa84174') {
+    if (addressContract == '0xc2132D05D31c914a87C6611C10748AEb04B58e8F' || addressContract == '0x2791bca1f2de4661ed88a30c99a7a9449aa84174') {
       mindiv = 6
     } else  if (addressContract == '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6') {
       mindiv = 8
     } else  {
       mindiv = 18
-    } */
+    }
 
 
-    let amount_wei = parseInt(human_number)
 
-    //let amount_wei = ethers.utils.parseUnits(human_number.toString(), mindiv)  // let's suppose we got wei number in query and we just parse it
+
+    let amount_wei = ethers.utils.parseUnits(human_number.toString(), mindiv)  // let's suppose we got wei number in query and we just parse it
     console.log("amount to approve in wei: ", amount_wei)
    // let passport_fee_wei = ethers.utils.formatUnits(1000,"wei");
     //let passport_fee_custom_gwei = ethers.utils.formatUnits(2000000,"gwei"); // 1 gwei = 1'000'000'000 wei, 2m gwei = 0,002 (estimateGas on approval = 0.02, so we need to take that fee for gas)
