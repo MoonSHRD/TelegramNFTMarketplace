@@ -47,14 +47,17 @@ export default function Purchase(props:Props){
   setHuman_number(a_ether);
   setPrice(p);
 
-  var ac_q = queryParams.get('collection_contract_address'); // erc20 to approve
+  /*
+  var ac_q = queryParams.get('collection_contract_address'); 
   var ac_a = ethers.utils.getAddress(ac_q);
   setCollectionAddress(ac_a);
+  */
+  setCollectionAddress(addressContract)
 
   var c = queryParams.get('currency');
   setCurrency(c);
   
-  const MetaMarketplaceRead:Contract = new ethers.Contract(addressContract, abi)//todo
+  const MetaMarketplaceRead:Contract = new ethers.Contract(marketAddress, abi)//todo
   var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id)
   console.log("Desired price:", desiredPrice)
 
@@ -71,7 +74,7 @@ export default function Purchase(props:Props){
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
     const user_address = signer._address
-    const MetaMarketplace:Contract = new ethers.Contract(addressContract, abi, signer)
+    const MetaMarketplace:Contract = new ethers.Contract(marketAddress, abi, signer)
     console.log("token id to interact raw: ", token_id)
 
     

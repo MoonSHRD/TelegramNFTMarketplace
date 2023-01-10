@@ -8,7 +8,6 @@ import {ethers} from "ethers"
 import ReadNFT_Telegram from "../components/readNFT_Telegram"
 import Purchase from "../components/purchase"
 import MakeBuyOffer from '../components/makeBuyOffer'
-import MakeSellOffer from "../components/makeSellOffer"
 //import MakeBuyOffer from "../components/makeBuyOffer"
 
 
@@ -124,7 +123,7 @@ const Home: NextPage = () => {
           <Heading my={4}  fontSize='xl'>Buy now!</Heading>
           <MakeBuyOffer 
             addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
-            marketAddress='0x2b1e0A2b16AB524Ad3f4273d1ecB63FC3b9cB58C'
+            marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
             currentAccount={currentAccount}
           />
         </Box> 
