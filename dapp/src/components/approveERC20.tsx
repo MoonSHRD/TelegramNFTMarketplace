@@ -35,11 +35,13 @@ export default function ApproveERC20(props:Props){
 
   async function approveERC20(event:React.FormEvent) {
     console.log(addressContract)
+    console.log(marketAddress)
     event.preventDefault()
     if(!window.ethereum) return    
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
     const user_address = signer._address
+    console.log(user_address)
     const ERC20_contract:Contract = new ethers.Contract(addressContract, abi, signer)
     
     var mindiv
