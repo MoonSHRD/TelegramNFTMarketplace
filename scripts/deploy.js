@@ -40,7 +40,7 @@ async function main() {
 
 
 
-
+  /*
   const ERC20Sample_F = await hre.ethers.getContractFactory("ERC20Sample");
   const our_currency = await ERC20Sample_F.deploy("VoxPopuly", "VXPPL",initialSupply);
   await our_currency.deployed();
@@ -52,7 +52,7 @@ async function main() {
 
   await Currencies.deployed();
   console.log("Currencies util contract deployed to:", Currencies.address);
-
+  */
 
   const MetaMarketplace_F = await hre.ethers.getContractFactory("MetaMarketplace");
   const MetaMarketplace = await MetaMarketplace_F.deploy(Currencies.address,"0xEbE648689E98abA446e38621E5a3491db03a7621",owner_account.address);
