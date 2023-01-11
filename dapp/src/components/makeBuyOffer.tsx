@@ -88,7 +88,7 @@ export default function MakeBuyOffer(props:Props){
      <Input id="price" type="text" placeholder="bid price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
      <div>
-     <Select id="currency" placeholder="Select currency you want to accept:" onChange={(e) => setCurrency(e.target.value)} value= {currency}  my={3}>
+     <Select id="currency" placeholder="Select currency in which you want to pay:" onChange={(e) => setCurrency(e.target.value)} value= {currency}  my={3}>
       <option value='0'>USDT</option>
       <option value='1'>USDC</option>
       <option value='2'>DAI</option>

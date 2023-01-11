@@ -66,6 +66,11 @@ export default function Purchase(props:Props){
   const MetaMarketplaceRead:Contract = new ethers.Contract(marketAddress, abi)
 
   var desiredPrice, desiredCurrency = MetaMarketplaceRead.getLastPrice(addressContract, token_id) // TODO: FIX IT, this function get only lastprice for already bought tokens
+  
+  var MarketplaceObj = MetaMarketplaceRead.Marketplaces(addressContract) // TODO: FIX IT, this function get only lastprice for already bought tokens
+  console.log("Desired price:", MarketplaceObj)
+
+
   console.log("Desired price:", desiredPrice)
   console.log("Desired currency: ", desCurrency);
 
