@@ -249,13 +249,13 @@ contract MetaMarketplace is ERC165, Ownable {
         if (standard == NftType.Telegram) 
         {
             royalties_reciver = _treasure_fund;
-            royalties_amount = calculateFee(grossSaleValue,1000);
+            royalties_amount = calculateAbstractFee(grossSaleValue,1000,promille_fee);
         } else
         {
             Marketplace storage m = Marketplaces[nft_token_contract_];
             royalties_reciver = m.collectionOwner;
-            uint256 royalties_ct = m.ownerFee;
-            royalties_amount = calculateAbstractFee(grossSaleValue,1000,royalties_ct);
+            //uint256 royalties_ct = m.ownerFee;
+            royalties_amount = calculateAbstractFee(grossSaleValue,1000,m.ownerFee);
         }
            return (royalties_reciver,royalties_amount);
     }
@@ -364,7 +364,7 @@ contract MetaMarketplace is ERC165, Ownable {
         metainfo.buyOffersEscrow[previousBuyOfferOwner][tokenId][currency_] = 0;    // zero escrow after refund
         
         // pull bid payment for lock
-        require(_pullFunds(currency_,msg.sender,bid_price_), "MetaMarketplace: can't pull funds from buyer to Marketplace contract");
+        require(_pullFunds(currency_,msg.sender,bid_price_), "can't pull funds from buyer to Marketplace contract");
 
         // Create a new buy offer
         metainfo.activeBuyOffers[tokenId][currency_].buyer = msg.sender;
@@ -432,7 +432,7 @@ contract MetaMarketplace is ERC165, Ownable {
         
         // Transfer funds to the seller
         // Tries to forward funds from this contract (which already has been locked when makeBuyOffer executed) to seller and distribute fees
-        require(_forwardFunds(token_contract_,tokenId,currency_, msg.sender, bid_value), "MetaMarketplace: can't forward funds to seller");
+        require(_forwardFunds(token_contract_,tokenId,currency_, msg.sender, bid_value), "Can't forward funds to seller");
         
         // Save the price & currency used
         metainfo.lastPrice[tokenId].lastPriceSold = bid_value;
@@ -452,11 +452,7 @@ contract MetaMarketplace is ERC165, Ownable {
     }
     
 
-    /**
-    *   Calculate fee (UnSafeMath) -- use it only if it ^0.8.0
-    *   @param amount number from whom we take fee
-    *   @param scale scale for rounding. 100 is 1/100 (percent). we can encreace scale if we want better division (like we need to take 0.5% instead of 5%, then scale = 1000)
-    */
+    /*
     function calculateFee(uint256 amount, uint256 scale) internal view returns (uint256) {
         uint a = amount / scale;
         uint b = amount % scale;
@@ -464,7 +460,13 @@ contract MetaMarketplace is ERC165, Ownable {
         uint d = promille_fee % scale;
         return a * c * scale + a * d + b * c + (b * d + scale - 1) / scale;
     }
+    */
 
+    /**
+    *   Calculate fee (UnSafeMath) -- use it only if it ^0.8.0
+    *   @param amount number from whom we take fee
+    *   @param scale scale for rounding. 100 is 1/100 (percent). we can encreace scale if we want better division (like we need to take 0.5% instead of 5%, then scale = 1000)
+    */
     function calculateAbstractFee(uint256 amount, uint256 scale, uint256 promille_fee_) public pure returns(uint256) {
         uint a = amount / scale;
         uint b = amount % scale;
@@ -488,8 +490,8 @@ contract MetaMarketplace is ERC165, Ownable {
            return false;    // return false if spender have not approved balance for deal
         }
 
-        uint256 scale = 1000;
-        uint256 fees = calculateFee(amount,scale);  // service fees
+        //uint256 scale = 1000;
+        uint256 fees = calculateAbstractFee(amount,1000,promille_fee);  // service fees
 
         // check royalties
         address r_reciver;
@@ -497,7 +499,7 @@ contract MetaMarketplace is ERC165, Ownable {
         (r_reciver,r_amount) = _deductRoyalties(nft_contract_,amount);
 
         uint256 net_amount = amount - fees - r_amount;
-        require(_currency_token.transferFrom(from_, address(this), amount), "MetaMarketplace: ERC20: transferFrom buyer to metamarketplace contract failed ");  // pull funds
+        require(_currency_token.transferFrom(from_, address(this), amount), "transferFrom buyer to metamarketplace contract failed");  // pull funds
         _currency_token.transfer(to_, net_amount);      // forward funds to seller
         _currency_token.transfer(_treasure_fund, fees); // collect fees
         
@@ -523,8 +525,8 @@ contract MetaMarketplace is ERC165, Ownable {
        
         IERC20 _currency_token = _currency_contract.get_hardcoded_currency(currency_);
         
-        uint256 scale = 1000;
-        uint256 fees = calculateFee(amount,scale);
+       // uint256 scale = 1000;
+        uint256 fees = calculateAbstractFee(amount,1000,promille_fee);
 
         // check royalties
         address r_reciver;
@@ -550,7 +552,7 @@ contract MetaMarketplace is ERC165, Ownable {
     */
     function _pullFunds(CurrenciesERC20.CurrencyERC20 currency_, address from_, uint256 amount) internal returns(bool) {
         IERC20 _currency_token = _currency_contract.get_hardcoded_currency(currency_);
-        require(_currency_token.transferFrom(from_, address(this), amount), "MetaMarketplace: ERC20: transferFrom buyer to metamarketplace contract failed, check approval ");  // pull funds
+        require(_currency_token.transferFrom(from_, address(this), amount), "transferFrom buyer to metamarketplace contract failed, check approval");  // pull funds
         return true;
     }
 
@@ -591,12 +593,13 @@ contract MetaMarketplace is ERC165, Ownable {
      *  if you need to get desired currency you need to get this array and then ask if some element is not zero
      *  kinda if (prices[0] != 0 || prices [0] != undefined, then desired currency is USDT
      */
-    function getFloorPrices(address nft_contract, uint256 token_id) public view returns (uint256[] memory) {
-        Marketplace storage metainfo = Marketplaces[nft_contract];
-        SellOffer storage offer = metainfo.activeSellOffers[token_id];
+    /*
+    function getFloorPrices(address nft_contract, uint256 token_id) public view returns (uint256[] memory prices) {
+      //  Marketplace storage metainfo = Marketplaces[nft_contract];
+        SellOffer storage offer = Marketplaces[nft_contract].activeSellOffers[token_id];
         //SellOffer storage offer = getSellOffer(nft_contract,token_id);
         //mapping (CurrenciesERC20.CurrencyERC20 => uint256) storage prices = offer.minPrice;
-        uint256[] memory prices;
+        //uint256[] memory prices;
         prices[0] = offer.minPrice[CurrenciesERC20.CurrencyERC20.USDT];
         prices[1] = offer.minPrice[CurrenciesERC20.CurrencyERC20.USDC];
         prices[2] = offer.minPrice[CurrenciesERC20.CurrencyERC20.DAI];
@@ -605,35 +608,33 @@ contract MetaMarketplace is ERC165, Ownable {
         prices[5] = offer.minPrice[CurrenciesERC20.CurrencyERC20.VXPPL];
         return prices;
     }
-    
-
-
-    /*
-    function getSeller(address nft_contract, uint256 token_id) public view returns (address) {
-        SellOffer storage offer = getSellOffer(nft_contract,token_id);
-        address seller = offer.seller;
-        return seller;
-    }
     */
 
-    
     /**
-     *  dev get all active buy offers by collection address and token id
-     *  return array of buyOffers
+     *  @dev get minimal prices which has been setted by seller
+     *  typically we assume that seller have one desired currency, but it may differ
+     *  if you need to get desired currency you need to get call this function for each currency and if it returns non-zero, then it is desired currency
      */
-    /*
-    function getBuyOffers(address nft_contract, uint256 token_id) public view returns(BuyOffer[] memory) {
-        Marketplace storage metainfo = Marketplaces[nft_contract];
-        BuyOffer[] memory offers;
-        offers[0] = metainfo.activeBuyOffers[token_id][CurrenciesERC20.CurrencyERC20.USDT];
-        offers[1] = metainfo.activeBuyOffers[token_id][CurrenciesERC20.CurrencyERC20.USDC];
-        offers[2] = metainfo.activeBuyOffers[token_id][CurrenciesERC20.CurrencyERC20.DAI];
-        offers[3] = metainfo.activeBuyOffers[token_id][CurrenciesERC20.CurrencyERC20.WETH];
-        offers[4] = metainfo.activeBuyOffers[token_id][CurrenciesERC20.CurrencyERC20.WBTC];
-        offers[5] = metainfo.activeBuyOffers[token_id][CurrenciesERC20.CurrencyERC20.VXPPL];
-        return offers;
+   function getFloorPriceByCurrency(address nft_contract, uint256 token_id, CurrenciesERC20.CurrencyERC20 currency) external view returns (uint256 floor_price) {
+     // SellOffer storage offer = Marketplaces[nft_contract].activeSellOffers[token_id];
+      return floor_price = Marketplaces[nft_contract].activeSellOffers[token_id].minPrice[currency];
+   }
+
+
+    
+    function getSeller(address nft_contract, uint256 token_id) public view returns (address seller) {
+       // SellOffer storage offer = Marketplaces[nft_contract].activeSellOffers[token_id];
+        return seller = Marketplaces[nft_contract].activeSellOffers[token_id].seller;
+       // return seller;
     }
-    */
+    
+
+    /**
+     *  @dev get buy offer by token_id and currency
+     */
+   function getBuyOffer(address nft_contract, uint256 token_id,CurrenciesERC20.CurrencyERC20 currency) external view returns (BuyOffer memory b_offer) {
+        return b_offer = Marketplaces[nft_contract].activeBuyOffers[token_id][currency];
+   }
 
 
     modifier marketplaceSetted(address mplace_) {
@@ -646,7 +647,7 @@ contract MetaMarketplace is ERC165, Ownable {
 
     modifier isMarketable(uint256 tokenId, address nft_contract_) {
         require(Marketplaces[nft_contract_].initialized == true,
-            "Marketplace for this token is not setup yet!");
+            "Marketplace for this nft_contract is not setup yet!");
         IERC721 token = IERC721(nft_contract_);
         require(token.getApproved(tokenId) == address(this),
             "Not approved");
@@ -664,7 +665,7 @@ contract MetaMarketplace is ERC165, Ownable {
     modifier tokenOwnerForbidden(uint256 tokenId,address nft_contract_) {
         IERC721 token = IERC721(nft_contract_);
         require(token.ownerOf(tokenId) != msg.sender,
-            "You can't buy token from yourself!");
+            "You can't buy nft from yourself!");
         _;
     }
 
