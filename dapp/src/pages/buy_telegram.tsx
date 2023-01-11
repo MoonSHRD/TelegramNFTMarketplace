@@ -8,6 +8,7 @@ import {ethers} from "ethers"
 import ReadNFT_Telegram from "../components/readNFT_Telegram"
 import Purchase from "../components/purchase"
 import MakeBuyOffer from '../components/makeBuyOffer'
+import ApproveERC20 from '../components/approveERC20'
 //import MakeBuyOffer from "../components/makeBuyOffer"
 
 
@@ -135,6 +136,16 @@ const Home: NextPage = () => {
         :<></>
         }
 
+          <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
+          <Heading my={4}  fontSize='xl'>Approve ERC20 before purchase</Heading>
+          <ApproveERC20
+            marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
+            currentAccount={currentAccount}
+          />
+        </Box> 
+
+
+
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Your NFT:</Heading>
           <ReadNFT_Telegram 
@@ -151,7 +162,7 @@ const Home: NextPage = () => {
           />
         </Box> 
         <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
-          <Heading my={4}  fontSize='xl'>Buy now!</Heading>
+          <Heading my={4}  fontSize='xl'>Make buy offer</Heading>
           <MakeBuyOffer 
             addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
             marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
