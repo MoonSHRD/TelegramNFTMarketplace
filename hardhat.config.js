@@ -40,6 +40,10 @@ module.exports = {
       process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     }
   },
+  optimizer: {
+    enabled: true,
+    runs: 1
+  },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
     currency: "USD",

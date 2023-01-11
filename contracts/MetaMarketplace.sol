@@ -5,11 +5,11 @@ pragma solidity ^0.8.0;
 
 //../node_modules/
 import './CurrenciesERC20.sol';
-import "./interfaces/IMetaMarketplace.sol";
+//import "./interfaces/IMetaMarketplace.sol";
 
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+//import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
@@ -570,27 +570,31 @@ contract MetaMarketplace is ERC165, Ownable {
         return (_lastPrice, currency_);
     }
 
-
+    /*
     function getMarketplace(address nft_contract) internal view returns (Marketplace storage) {
         Marketplace storage metainfo = Marketplaces[nft_contract];
         return metainfo;
     }
+    */
 
-
+    /*
     function getSellOffer(address nft_contract, uint256 token_id) internal view returns (SellOffer storage) {
         Marketplace storage metainfo = Marketplaces[nft_contract];
         SellOffer storage offer = metainfo.activeSellOffers[token_id];
         return offer;
     }
+    */
 
     /**
-     *  @dev get minimal prices which has been setted by seller
+     *  dev get minimal prices which has been setted by seller
      *  typically we assume that seller have one desired currency, but it may differ
      *  if you need to get desired currency you need to get this array and then ask if some element is not zero
      *  kinda if (prices[0] != 0 || prices [0] != undefined, then desired currency is USDT
      */
     function getFloorPrices(address nft_contract, uint256 token_id) public view returns (uint256[] memory) {
-        SellOffer storage offer = getSellOffer(nft_contract,token_id);
+        Marketplace storage metainfo = Marketplaces[nft_contract];
+        SellOffer storage offer = metainfo.activeSellOffers[token_id];
+        //SellOffer storage offer = getSellOffer(nft_contract,token_id);
         //mapping (CurrenciesERC20.CurrencyERC20 => uint256) storage prices = offer.minPrice;
         uint256[] memory prices;
         prices[0] = offer.minPrice[CurrenciesERC20.CurrencyERC20.USDT];
@@ -601,17 +605,23 @@ contract MetaMarketplace is ERC165, Ownable {
         prices[5] = offer.minPrice[CurrenciesERC20.CurrencyERC20.VXPPL];
         return prices;
     }
+    
 
+
+    /*
     function getSeller(address nft_contract, uint256 token_id) public view returns (address) {
         SellOffer storage offer = getSellOffer(nft_contract,token_id);
         address seller = offer.seller;
         return seller;
     }
+    */
 
+    
     /**
-     *  @dev get all active buy offers by collection address and token id
-     *  @return array of buyOffers
+     *  dev get all active buy offers by collection address and token id
+     *  return array of buyOffers
      */
+    /*
     function getBuyOffers(address nft_contract, uint256 token_id) public view returns(BuyOffer[] memory) {
         Marketplace storage metainfo = Marketplaces[nft_contract];
         BuyOffer[] memory offers;
@@ -623,8 +633,8 @@ contract MetaMarketplace is ERC165, Ownable {
         offers[5] = metainfo.activeBuyOffers[token_id][CurrenciesERC20.CurrencyERC20.VXPPL];
         return offers;
     }
+    */
 
-    
 
     modifier marketplaceSetted(address mplace_) {
         require(Marketplaces[mplace_].initialized == true,
@@ -667,10 +677,11 @@ contract MetaMarketplace is ERC165, Ownable {
         _;
     }
 
+    /*
     function supportsInterface(bytes4 interfaceId)
     public view override
     returns (bool) {
        return interfaceId == type(IMetaMarketplace).interfaceId || super.supportsInterface(interfaceId);
     }
-
+    */
 }
