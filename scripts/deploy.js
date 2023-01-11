@@ -56,7 +56,18 @@ async function main() {
 
   const currencies_address = "0xB85D9f60241798e53BB9bCac58447f0aaAA071C1";
 
-  const MetaMarketplace_F = await hre.ethers.getContractFactory("MetaMarketplace");
+  const calculator_lib_f = await hre.ethers.getContractFactory("FeesCalculator");
+  const calculator_lib = await calculator_lib_f.deploy();
+  await calculator_lib.deployed();
+  console.log("calculator lib deployed to: ", calculator_lib.address); 
+
+
+
+  const MetaMarketplace_F = await hre.ethers.getContractFactory("MetaMarketplace", {
+    libraries: {
+      FeesCalculator: calculator_lib.address,
+    },
+  });
   const MetaMarketplace = await MetaMarketplace_F.deploy(currencies_address,"0xEbE648689E98abA446e38621E5a3491db03a7621",owner_account.address);
   await MetaMarketplace.deployed();
   console.log("MetaMarketplace deployed to:", MetaMarketplace.address);
