@@ -139,7 +139,7 @@ const Home: NextPage = () => {
           <Box  mb={0} p={4} w='100%' borderWidth="1px" borderRadius="lg">
           <Heading my={4}  fontSize='xl'>Approve ERC20 before purchase</Heading>
           <ApproveERC20
-            marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
+            marketAddress='0x087313C2c161c814C4270f07Ebd455AB902a0c10'
             currentAccount={currentAccount}
           />
         </Box> 
@@ -157,7 +157,7 @@ const Home: NextPage = () => {
           <Heading my={4}  fontSize='xl'>Buy now!</Heading>
           <Purchase 
             addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
-            marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
+            marketAddress='0x087313C2c161c814C4270f07Ebd455AB902a0c10'
             currentAccount={currentAccount}
           />
         </Box> 
@@ -165,7 +165,7 @@ const Home: NextPage = () => {
           <Heading my={4}  fontSize='xl'>Make buy offer</Heading>
           <MakeBuyOffer 
             addressContract='0xEbE648689E98abA446e38621E5a3491db03a7621'
-            marketAddress='0x8CeC1dD2802C820574b34357b4AdD49aaF100fAD'
+            marketAddress='0x087313C2c161c814C4270f07Ebd455AB902a0c10'
             currentAccount={currentAccount}
           />
         </Box> 
