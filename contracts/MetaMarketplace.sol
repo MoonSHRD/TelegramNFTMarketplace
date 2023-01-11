@@ -5,11 +5,12 @@ pragma solidity ^0.8.0;
 
 //../node_modules/
 import './CurrenciesERC20.sol';
+import './FeesCalculator.sol';
 //import "./interfaces/IMetaMarketplace.sol";
 
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
-//import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
@@ -37,6 +38,7 @@ import "../node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol";
  * original idea from https://github.com/benber86/nft_royalties_market
  * @notice Defines a marketplace to bid on and sell NFTs.
  *         each marketplace is a struct tethered to nft-token contract
+ * @notice This contract is COPYRIGHTED, ALL RIGHTS RESERVED 
  *         
  */
 contract MetaMarketplace is ERC165, Ownable {
@@ -94,6 +96,7 @@ contract MetaMarketplace is ERC165, Ownable {
 
     // Currencies lib
     CurrenciesERC20 _currency_contract;
+
 
     uint public promille_fee = 15; // service fee (1.5%)
     // Address where we collect comission
@@ -249,13 +252,13 @@ contract MetaMarketplace is ERC165, Ownable {
         if (standard == NftType.Telegram) 
         {
             royalties_reciver = _treasure_fund;
-            royalties_amount = calculateAbstractFee(grossSaleValue,1000,promille_fee);
+            royalties_amount = FeesCalculator.calculateAbstractFee(grossSaleValue,1000,promille_fee);
         } else
         {
             Marketplace storage m = Marketplaces[nft_token_contract_];
             royalties_reciver = m.collectionOwner;
             //uint256 royalties_ct = m.ownerFee;
-            royalties_amount = calculateAbstractFee(grossSaleValue,1000,m.ownerFee);
+            royalties_amount = FeesCalculator.calculateAbstractFee(grossSaleValue,1000,m.ownerFee);
         }
            return (royalties_reciver,royalties_amount);
     }
@@ -289,7 +292,8 @@ contract MetaMarketplace is ERC165, Ownable {
             revert("Invalid sell offer");
         }
 
-        require(metainfo.activeSellOffers[tokenId].minPrice[currency_] > 0, "price for this currency has not been setted, use makeBuyOffer() instead");
+        //require(metainfo.activeSellOffers[tokenId].minPrice[currency_] > 0, "price for this currency has not been setted, use makeBuyOffer() instead");
+        require(metainfo.activeSellOffers[tokenId].minPrice[currency_] > 0, "use makeBuyOffer()");
         require(bid_price_ >= metainfo.activeSellOffers[tokenId].minPrice[currency_],
             "Bid amount lesser than desired price!");
 
@@ -297,7 +301,7 @@ contract MetaMarketplace is ERC165, Ownable {
         // Transfer funds (ERC20-currency) to the seller and distribute fees
         if(_processPurchase(token_contract_,tokenId,currency_,msg.sender,seller,bid_price_) == false) {
           //  delete metainfo.activeBuyOffers[tokenId][currency_];                    // if we can't move funds from buyer to seller, then buyer either don't have enough balance nor approved spending this much, so we delete this order
-            revert("Approved amount is lesser than (bid_price_) needed to deal");
+            revert("Approved amount is lesser than (bid_price_)");
         }
 
         // Save the price & currency used
@@ -452,21 +456,8 @@ contract MetaMarketplace is ERC165, Ownable {
     }
     
 
-    /*
-    function calculateFee(uint256 amount, uint256 scale) internal view returns (uint256) {
-        uint a = amount / scale;
-        uint b = amount % scale;
-        uint c = promille_fee / scale;
-        uint d = promille_fee % scale;
-        return a * c * scale + a * d + b * c + (b * d + scale - 1) / scale;
-    }
-    */
 
-    /**
-    *   Calculate fee (UnSafeMath) -- use it only if it ^0.8.0
-    *   @param amount number from whom we take fee
-    *   @param scale scale for rounding. 100 is 1/100 (percent). we can encreace scale if we want better division (like we need to take 0.5% instead of 5%, then scale = 1000)
-    */
+    /*
     function calculateAbstractFee(uint256 amount, uint256 scale, uint256 promille_fee_) public pure returns(uint256) {
         uint a = amount / scale;
         uint b = amount % scale;
@@ -474,7 +465,7 @@ contract MetaMarketplace is ERC165, Ownable {
         uint d = promille_fee_ % scale;
         return a * c * scale + a * d + b * c + (b * d + scale - 1) / scale;
     }
-
+    */
 
     /**
      * @dev Determines how ERC20 is stored/forwarded on *purchases*. Here we take our fee. This function can be tethered to buy tx or can be separate from buy flow.
@@ -491,7 +482,7 @@ contract MetaMarketplace is ERC165, Ownable {
         }
 
         //uint256 scale = 1000;
-        uint256 fees = calculateAbstractFee(amount,1000,promille_fee);  // service fees
+        uint256 fees = FeesCalculator.calculateAbstractFee(amount,1000,promille_fee);  // service fees
 
         // check royalties
         address r_reciver;
@@ -526,7 +517,7 @@ contract MetaMarketplace is ERC165, Ownable {
         IERC20 _currency_token = _currency_contract.get_hardcoded_currency(currency_);
         
        // uint256 scale = 1000;
-        uint256 fees = calculateAbstractFee(amount,1000,promille_fee);
+        uint256 fees = FeesCalculator.calculateAbstractFee(amount,1000,promille_fee);
 
         // check royalties
         address r_reciver;
@@ -552,7 +543,7 @@ contract MetaMarketplace is ERC165, Ownable {
     */
     function _pullFunds(CurrenciesERC20.CurrencyERC20 currency_, address from_, uint256 amount) internal returns(bool) {
         IERC20 _currency_token = _currency_contract.get_hardcoded_currency(currency_);
-        require(_currency_token.transferFrom(from_, address(this), amount), "transferFrom buyer to metamarketplace contract failed, check approval");  // pull funds
+        require(_currency_token.transferFrom(from_, address(this), amount), "transferFrom buyer to marketplace contract failed, check approval");  // pull funds
         return true;
     }
 
