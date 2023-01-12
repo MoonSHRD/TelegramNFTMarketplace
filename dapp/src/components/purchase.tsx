@@ -63,7 +63,7 @@ export default function Purchase(props:Props){
   var c = queryParams.get('currency');
   setCurrency(c);
   
-  const MetaMarketplaceRead:Contract = new ethers.Contract(marketAddress, abi)
+  const MetaMarketplace:Contract = new ethers.Contract(marketAddress, abi)
 
   console.log("Market address:", marketAddress)
 
@@ -72,7 +72,7 @@ export default function Purchase(props:Props){
   var desiredPrice, desiredCurrency
   
   for (let i = 0; (desiredPrice == 0 || desiredPrice == undefined) && i < 6; i++ ) {
-    desiredPrice = MetaMarketplaceRead.getFloorPriceByCurrency(addressContract, token_id, i)
+    desiredPrice = MetaMarketplace.getFloorPriceByCurrency(addressContract, token_id, i)
     desiredCurrency = currencies[i]
     console.log(i)
   }
