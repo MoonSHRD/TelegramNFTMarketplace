@@ -65,6 +65,7 @@ export default function Purchase(props:Props){
   
   const MetaMarketplaceRead:Contract = new ethers.Contract(marketAddress, abi)
 
+  console.log("Market address:", marketAddress)
 
   const currencies = ["USDT", "USDC", "DAI", "WETH", "WBTC", "VXPPL"]
 
