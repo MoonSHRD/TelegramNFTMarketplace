@@ -71,7 +71,7 @@ export default function Purchase(props:Props){
   var desiredPrice, desiredCurrency
   
   for (let i = 0; (desiredPrice == 0 || desiredPrice == undefined) && i < 6; i++ ) {
-    desiredPrice = MetaMarketplaceRead.getFloorPriceByCurrency(addressContract, token_id, currencies[i])
+    desiredPrice = MetaMarketplaceRead.getFloorPriceByCurrency(addressContract, token_id, i)
     desiredCurrency = currencies[i]
   }
 
