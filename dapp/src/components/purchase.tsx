@@ -28,7 +28,7 @@ export default function Purchase(props:Props){
   var [human_number,setHuman_number] = useState<string>("")
   var [token_id,setTokenId] = useState(0)
   var [collection_address, setCollectionAddress] = useState<string>("")
-
+  var [desiredPrice, setDesiredPrice] = useState<string>("0")
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -62,8 +62,9 @@ export default function Purchase(props:Props){
 
   var c = queryParams.get('currency');
   setCurrency(c);
-  const provider = new ethers.providers.Web3Provider(window.ethereum)
-   
+  const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet-rpc.allthatnode.com:8545")
+  
+  //const signer = provider.getSigner()
 
   const MetaMarketplaceRead:Contract = new ethers.Contract(marketAddress, abi, provider)
 
@@ -71,17 +72,33 @@ export default function Purchase(props:Props){
 
   const currencies = ["USDT", "USDC", "DAI", "WETH", "WBTC", "VXPPL"]
 
-  var desiredPrice, desiredCurrency
   
-  for (let i = 0; (desiredPrice == 0 || desiredPrice == undefined) && i < 6; i++ ) {
-    desiredPrice = MetaMarketplaceRead.getFloorPriceByCurrency(addressContract, token_id, 5)
-    desiredCurrency = currencies[i]
+  
+  const fetchData = async () => {
+
+  for (let i = 0; desiredPrice == '0' && i < 6; i++ ) {
+    var desiredPriceBN
+    desiredPriceBN = await MetaMarketplaceRead.getFloorPriceByCurrency(addressContract, 4, i)
+    
+    desiredPrice = desiredPriceBN.toString()
+
+    desCurrency = i.toString()
+    
     console.log(i)
+    console.log("Desired price:", desiredPrice)
+    console.log("Desired currency: ", desCurrency);
+
+    console.log("Actual price:", price)
+    console.log("Actual currency:", currency)
+
   }
 
+}
 
-  console.log("Desired price:", desiredPrice)
-  console.log("Desired currency: ", desCurrency);
+fetchData()
+
+
+  
 
   // TODO: add getter for active sell offer in contract?
   /*
@@ -91,8 +108,8 @@ export default function Purchase(props:Props){
 
 
 
-  if (desiredPrice != undefined && desiredCurrency != undefined) {
-    setDesCurrency(desiredCurrency)
+  if (desiredPrice != undefined && desCurrency != undefined) {
+    setDesCurrency(desCurrency)
   }
   
 
@@ -139,7 +156,7 @@ export default function Purchase(props:Props){
         <Text><b>Marketplace address</b>:{marketAddress}</Text>
 
     </div>
-      <Button type="submit" isDisabled={!currentAccount || currency != desCurrency}>Buy</Button>
+      <Button type="submit" isDisabled={!currentAccount || currency != desCurrency || price != desiredPrice}>Buy</Button>
     </FormControl>
     </form>
   )
