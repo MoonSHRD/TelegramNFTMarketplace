@@ -45,7 +45,9 @@ export default function Purchase(props:Props){
   var a_ether = ethers.utils.formatEther(p);
   console.log(a_ether);
   setHuman_number(a_ether);
+  
   setPrice(p);
+  //price = p;
 
   /*
   var ac_q = queryParams.get('collection_contract_address'); 
@@ -61,7 +63,9 @@ export default function Purchase(props:Props){
   }
 
   var c = queryParams.get('currency');
+  
   setCurrency(c);
+  //currency = c;
   const provider = new ethers.providers.JsonRpcProvider("https://polygon-mainnet-rpc.allthatnode.com:8545")
   
   //const signer = provider.getSigner()
@@ -80,16 +84,17 @@ export default function Purchase(props:Props){
     var desiredPriceBN
     desiredPriceBN = await MetaMarketplaceRead.getFloorPriceByCurrency(addressContract, 4, i)
     
-    desiredPrice = desiredPriceBN.toString()
+    setDesiredPrice(desiredPriceBN.toString())
 
-    desCurrency = i.toString()
+    setDesCurrency(i.toString())
     
-    console.log(i)
     console.log("Desired price:", desiredPrice)
     console.log("Desired currency: ", desCurrency);
 
     console.log("Actual price:", price)
     console.log("Actual currency:", currency)
+  
+    
 
   }
 
@@ -108,9 +113,7 @@ fetchData()
 
 
 
-  if (desiredPrice != undefined && desCurrency != undefined) {
-    setDesCurrency(desCurrency)
-  }
+ 
   
 
 
@@ -156,7 +159,7 @@ fetchData()
         <Text><b>Marketplace address</b>:{marketAddress}</Text>
 
     </div>
-      <Button type="submit" isDisabled={!currentAccount || currency != desCurrency || price != desiredPrice}>Buy</Button>
+      <Button type="submit" isDisabled={price != desiredPrice}>Buy</Button>
     </FormControl>
     </form>
   )
