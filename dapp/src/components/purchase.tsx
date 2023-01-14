@@ -173,8 +173,8 @@ function countDecimals(pri, cur) {
      
       <div>
       <Text>Select amount & currency in which you wish to pay:</Text>
-      <Input id="price" type="text" placeholder="Bid amount" required  onChange={(e) => setPrice(countDecimals(e.target.value, currency))} onInput={(e) => setHuman_number(e.target.value)} value={human_number} my={3}/> 
-      <Select id="currency" placeholder="Select currency in which you want to pay:" onChange={(e) => setCurrency(e.target.value)} value= {currency} onInput={(e) => setPrice(countDecimals(human_number, e.target.value))} my={3}>
+      <Input id="price" type="text" placeholder="Bid amount" required  onChange={(e) => setPrice(countDecimals(e.target.value, currency))} onInput={(e) => setHuman_number(e.currentTarget.value)} value={human_number} my={3}/> 
+      <Select id="currency" placeholder="Select currency in which you want to pay:" onChange={(e) => setCurrency(e.target.value)} value= {currency} onInput={(e) => setPrice(countDecimals(human_number, e.currentTarget.value))} my={3}>
       <option value='0'>USDT</option>
       <option value='1'>USDC</option>
       <option value='2'>DAI</option>
