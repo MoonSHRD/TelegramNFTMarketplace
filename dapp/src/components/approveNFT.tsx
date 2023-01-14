@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Button, Input , NumberInput,  NumberInputField,  FormControl,  FormLabel, Text } from '@chakra-ui/react'
 import {ethers} from 'ethers'
 import {parseEther } from 'ethers/lib/utils'
-import {abi} from '../../../artifacts/@openzeppelin/contracts/token/ERC721/ERC721.sol/ERC721.json'
+import {abi} from '../../../artifacts/@openzeppelin/contracts/token/ERC721/ERC721.sol/IERC721.json'
 import { Contract } from "ethers"
 import { TransactionResponse,TransactionReceipt } from "@ethersproject/abstract-provider"
 
