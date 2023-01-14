@@ -165,7 +165,7 @@ function countDecimals(pri, cur) {
   return (
     <form onSubmit={purchase}>
     <FormControl>
-      <FormLabel >Token id & token's contract address: </FormLabel>
+      <FormLabel >Token id & token contract address: </FormLabel>
       <Input id="token_id" type="number" placeholder="Token ID"  required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
       <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
     
