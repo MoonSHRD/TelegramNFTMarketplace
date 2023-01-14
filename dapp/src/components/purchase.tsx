@@ -41,10 +41,7 @@ export default function Purchase(props:Props){
 
   
   var p = queryParams.get('price');
-  console.log(p);
-  var a_ether = ethers.utils.formatEther(p);
-  console.log(a_ether);
-  setHuman_number(a_ether);
+  setHuman_number(p);
   
   setPrice(p);
   //price = p;
@@ -74,7 +71,7 @@ export default function Purchase(props:Props){
 
   console.log("Market address:", marketAddress)
 
-  const currencies = ["USDT", "USDC", "DAI", "WETH", "WBTC", "VXPPL"]
+  
 
   
   
@@ -141,25 +138,54 @@ fetchData()
          .catch((e:Error) => console.log(e))
      }
 
-
+function countDecimals(pri, cur) {
+  var mindiv
+  console.log("unedited price is:",pri)
+  console.log("unedited amount to pay in wei: ", price)
+    if (pri == "") {
+      pri = 0
+    }
+    if (cur == '0' || cur == '1') { //usdt
+      mindiv = 6
+    } else  if (addressContract == '4') { //wbtc
+      mindiv = 8
+    } else  {
+      mindiv = 18
+    }
+    
+    
+    let amount_wei = ethers.utils.parseUnits(pri, mindiv)  // let's suppose we got wei number in query and we just parse it
+    console.log("amount to pay in wei: ", price)
+    console.log("currency", currency)
+    return amount_wei.toString()
+}
   
   //const handleChange = (value:string) => setUserId(value)   
   
   return (
     <form onSubmit={purchase}>
     <FormControl>
-      <FormLabel >Purchase an nft: </FormLabel>
-      <Input id="token_id" type="number" required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
+      <FormLabel >Token id & token's contract address: </FormLabel>
+      <Input id="token_id" type="number" placeholder="Token ID"  required  onChange={(e) => setTokenId(parseInt(e.target.value))} value={token_id} my={3}/>
+      <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
+    
      
-     <Input id="price" type="text" placeholder="bid price" required  onChange={(e) => setPrice(e.target.value)} value={price} my={3}/> 
-     <Input id="collection_contract_address" type="text" required  onChange={(e) => setCollectionAddress(e.target.value)} value={collection_address} my={3}/>
+     
       <div>
-        <Text><b>Token id to buy</b>:{token_id}</Text>
-        <Text><b>Currency</b>:{currency}</Text>
+      <Text>Select amount & currency in which you wish to pay:</Text>
+      <Input id="price" type="text" placeholder="Bid amount" required  onChange={(e) => setPrice(countDecimals(e.target.value, currency))} onInput={(e) => setHuman_number(e.target.value)} value={human_number} my={3}/> 
+      <Select id="currency" placeholder="Select currency in which you want to pay:" onChange={(e) => setCurrency(e.target.value)} value= {currency} onInput={(e) => setPrice(countDecimals(human_number, e.target.value))} my={3}>
+      <option value='0'>USDT</option>
+      <option value='1'>USDC</option>
+      <option value='2'>DAI</option>
+      <option value='3'>WETH</option>
+      <option value='4'>WBTC</option>
+      <option value='5'>VXPPL</option>
+      </Select>
         <Text><b>Marketplace address</b>:{marketAddress}</Text>
 
     </div>
-      <Button type="submit" isDisabled={price != desiredPrice}>Buy</Button>
+      <Button type="submit" isDisabled={price != desiredPrice || currency != desCurrency}>Buy</Button>
     </FormControl>
     </form>
   )
